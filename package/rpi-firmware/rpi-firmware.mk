@@ -48,11 +48,24 @@ define RPI_FIRMWARE_INSTALL_BOOTCODE_BIN
 endef
 endif
 
+ifeq ($(BR2_PACKAGE_RPI_FIRMWARE_CUSTOM_LIST),y)
+define RPI_FIRMWARE_INSTALL_FIRMWARE
+	$(foreach firmware,$(call qstrip,$(BR2_PACKAGE_RPI_FIRMWARE_LIST)), \
+		$(INSTALL) -D -m 0644 $(@D)/boot/$(firmware) $(BINARIES_DIR)/rpi-firmware/$(firmware)
+	)
+endef
+else
+define RPI_FIRMWARE_INSTALL_FIRMWARE
+	$(INSTALL) -D -m 0644 $(@D)/boot/start$(BR2_PACKAGE_RPI_FIRMWARE_BOOT).elf $(BINARIES_DIR)/rpi-firmware/start.elf
+	$(INSTALL) -D -m 0644 $(@D)/boot/fixup$(BR2_PACKAGE_RPI_FIRMWARE_BOOT).dat $(BINARIES_DIR)/rpi-firmware/fixup.dat
+endef
+endif
+
+
 define RPI_FIRMWARE_INSTALL_IMAGES_CMDS
 	$(INSTALL) -D -m 0644 package/rpi-firmware/config.txt $(BINARIES_DIR)/rpi-firmware/config.txt
 	$(INSTALL) -D -m 0644 package/rpi-firmware/cmdline.txt $(BINARIES_DIR)/rpi-firmware/cmdline.txt
-	$(INSTALL) -D -m 0644 $(@D)/boot/start$(BR2_PACKAGE_RPI_FIRMWARE_BOOT).elf $(BINARIES_DIR)/rpi-firmware/start.elf
-	$(INSTALL) -D -m 0644 $(@D)/boot/fixup$(BR2_PACKAGE_RPI_FIRMWARE_BOOT).dat $(BINARIES_DIR)/rpi-firmware/fixup.dat
+	$(RPI_FIRMWARE_INSTALL_FIRMWARE)
 	$(RPI_FIRMWARE_INSTALL_BOOTCODE_BIN)
 	$(RPI_FIRMWARE_INSTALL_DTB)
 	$(RPI_FIRMWARE_INSTALL_DTB_OVERLAYS)

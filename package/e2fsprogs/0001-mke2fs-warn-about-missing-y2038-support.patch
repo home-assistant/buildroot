@@ -1,0 +1,64 @@
+From a23b50cdb55cb826b8745cbc37429c93f7b60c66 Mon Sep 17 00:00:00 2001
+From: "Darrick J. Wong" <djwong@kernel.org>
+Date: Thu, 12 Aug 2021 16:22:22 -0700
+Subject: mke2fs: warn about missing y2038 support when formatting fresh ext4
+ fs
+
+Filesystems with 128-byte inodes do not support timestamps beyond the
+year 2038.  Since we're now less than 16.5 years away from that point,
+it's time to start warning users about this lack of support when they
+format an ext4 filesystem with small inodes.
+
+(Note that even for ext2 and ext3, we changed the default for
+non-small file systems in 2008 in commit commit b1631cce648e ("Create
+new filesystems with 256-byte inodes by default").)
+
+So change the mke2fs.conf file to specify 256-byte inodes even for
+small filesystems, and then add a warning to mke2fs itself if someone
+is trying to make us format a file system with 128-byte inodes.  This
+can be suppressed by setting the boolean option warn_y2038_dates in
+the mke2fs.conf file to false, which we do in the case of GNU Hurd,
+since it only supports 128 byte inodes as of this writing.
+
+[ Patch reworked by tytso to only warn in the case of GNU Hurd, since
+  the default for ext2/ext3 was changed for all but small file systems
+  in 2008. ]
+
+Signed-off-by: Darrick J. Wong <djwong@kernel.org>
+Signed-off-by: Theodore Ts'o <tytso@mit.edu>
+---
+ misc/mke2fs.conf.in | 4 +---
+ 1 file changed, 1 insertion(+), 3 deletions(-)
+
+(limited to 'misc/mke2fs.conf.in')
+
+diff --git a/misc/mke2fs.conf.in b/misc/mke2fs.conf.in
+index 01e35cf8..05680992 100644
+--- a/misc/mke2fs.conf.in
++++ b/misc/mke2fs.conf.in
+@@ -12,16 +12,13 @@
+ 	}
+ 	ext4 = {
+ 		features = has_journal,extent,huge_file,flex_bg,metadata_csum,64bit,dir_nlink,extra_isize
+-		inode_size = 256
+ 	}
+ 	small = {
+ 		blocksize = 1024
+-		inode_size = 128
+ 		inode_ratio = 4096
+ 	}
+ 	floppy = {
+ 		blocksize = 1024
+-		inode_size = 128
+ 		inode_ratio = 8192
+ 	}
+ 	big = {
+@@ -44,4 +41,5 @@
+ 	hurd = {
+ 	     blocksize = 4096
+ 	     inode_size = 128
++	     warn_y2038_dates = 0
+ 	}
+-- 
+cgit 1.2.3-1.el7
+

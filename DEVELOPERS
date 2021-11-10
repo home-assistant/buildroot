@@ -229,10 +229,6 @@ F:	package/python-bottle/
 F:	package/sqlcipher/
 F:	package/stress/
 
-N:	Arthur Courtel <arthur.courtel@smile.fr>
-F:	board/raspberrypi/genimage-raspberrypi4-64.cfg
-F:	configs/raspberrypi4_64_defconfig
-
 N:	Asaf Kahlon <asafka7@gmail.com>
 F:	package/collectd/
 F:	package/libfuse3/
@@ -1050,8 +1046,13 @@ F:	package/webp/
 F:	package/xapian/
 
 N:	Giulio Benetti <giulio.benetti@benettiengineering.com>
+F:	board/olimex/a*
+F:	configs/amarula_vyasa_rk3288_defconfig
+F:	configs/asus_tinker_rk3288_defconfig
+F:	configs/olimex_a*
 F:	package/at/
 F:	package/binutils/
+F:	package/erlang-jiffy/
 F:	package/gcc/
 F:	package/harfbuzz/
 F:	package/libfuse3/
@@ -1326,7 +1327,9 @@ N:	Joachim Wiberg <troglobit@gmail.com>
 F:	configs/globalscale_espressobin_defconfig
 F:	board/globalscale/espressobin/
 F:	package/libite/
+F:	package/libuev/
 F:	package/mg/
+F:	package/mrouted/
 F:	package/netcalc/
 F:	package/ssdp-responder/
 F:	package/sysklogd/
@@ -1941,10 +1944,6 @@ F:	package/shadowsocks-libev/
 
 N:	Mircea Gliga <gliga.mircea@gmail.com>
 F:	package/mbuffer/
-
-N:	Mirza Krak <mirza.krak@northern.tech>
-F:	package/mender/
-F:	package/mender-artifact/
 
 N:	Murat Demirten <mdemirten@yh.com.tr>
 F:	package/jpeg-turbo/

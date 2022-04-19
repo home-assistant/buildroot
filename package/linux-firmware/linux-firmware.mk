@@ -438,7 +438,12 @@ LINUX_FIRMWARE_ALL_LICENSE_FILES += LICENSE.QualcommAtheros_ath10k
 endif
 
 ifeq ($(BR2_PACKAGE_LINUX_FIRMWARE_IWLWIFI_22000),y)
-LINUX_FIRMWARE_FILES += iwlwifi-QuZ-*.ucode iwlwifi-Qu-*.ucode
+LINUX_FIRMWARE_FILES += \
+	iwlwifi-QuZ-*.ucode \
+	iwlwifi-Qu-*.ucode \
+	iwlwifi-cc-*.ucode \
+	iwlwifi-so-*.ucode \
+	iwlwifi-ty-*.ucode
 LINUX_FIRMWARE_ALL_LICENSE_FILES += LICENCE.iwlwifi_firmware
 endif
 

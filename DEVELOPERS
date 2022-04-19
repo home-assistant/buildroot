@@ -2082,7 +2082,7 @@ F:	package/libevdev/
 F:	package/pkg-qmake.mk
 F:	package/qt5/qt5opcua/
 
-N:	Neal Frager <neal.frager@xilinx.com>
+N:	Neal Frager <neal.frager@amd.com>
 F:	board/zynqmp/
 F:	configs/zynqmp_zcu102_defconfig
 
@@ -2749,8 +2749,11 @@ F:	utils/size-stats-compare
 F:	toolchain/
 
 N:	Thomas Huth <huth@tuxfamily.org>
+F:	board/qemu/m68k-mcf5208/
+F:	configs/qemu_m68k_mcf5208_defconfig
 F:	package/ascii-invaders/
 F:	package/frotz/
+F:	package/kvm-unit-tests/
 F:	package/xorcurses/
 
 N:	Thomas Petazzoni <thomas.petazzoni@bootlin.com>

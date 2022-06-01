@@ -498,7 +498,7 @@ else
 SYSTEMD_CONF_OPTS += -Dnss-resolve=false -Dresolve=false
 endif
 
-ifeq ($(BR2_PACKAGE_OPENSSL),y)
+ifeq ($(BR2_PACKAGE_LIBOPENSSL),y)
 SYSTEMD_CONF_OPTS += \
 	-Dgnutls=false \
 	-Dopenssl=true \
@@ -603,6 +603,8 @@ endef
 
 define SYSTEMD_USERS
 	# udev user groups
+	- - render -1 * - - - DRI rendering nodes
+	- - sgx -1 * - - - SGX device nodes
 	# systemd user groups
 	- - systemd-journal -1 * - - - Journal
 	$(SYSTEMD_REMOTE_USER)

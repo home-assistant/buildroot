@@ -1,0 +1,24 @@
+diff -uraBN grub-2.06.orig/Makefile.am grub-2.06/Makefile.am
+--- grub-2.06.orig/Makefile.am	2020-03-10 21:39:53.000000000 +0100
++++ grub-2.06/Makefile.am	2022-08-04 12:48:15.486566890 +0200
+@@ -51,7 +51,7 @@
+ CLEANFILES += libgrub_a_init.c
+ 
+ # For grub-fstest
+-grub_fstest.pp: $(grub_fstest_SOURCES)
++grub_fstest.pp: config-util.h $(grub_fstest_SOURCES)
+ 	$(CPP) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(grub_fstest_CPPFLAGS) $(CPPFLAGS) \
+ 	  -D'GRUB_MOD_INIT(x)=@MARKER@x@' $^ > $@ || (rm -f $@; exit 1)
+ CLEANFILES += grub_fstest.pp
+diff -uraBN grub-2.06.orig/Makefile.in grub-2.06/Makefile.in
+--- grub-2.06.orig/Makefile.in	2021-06-08 16:41:36.000000000 +0200
++++ grub-2.06/Makefile.in	2022-08-04 12:48:08.116566935 +0200
+@@ -13312,7 +13312,7 @@
+ 	sh $(top_srcdir)/geninit.sh `cat $<` > $@ || (rm -f $@; exit 1)
+ 
+ # For grub-fstest
+-grub_fstest.pp: $(grub_fstest_SOURCES)
++grub_fstest.pp: config-util.h $(grub_fstest_SOURCES)
+ 	$(CPP) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(grub_fstest_CPPFLAGS) $(CPPFLAGS) \
+ 	  -D'GRUB_MOD_INIT(x)=@MARKER@x@' $^ > $@ || (rm -f $@; exit 1)
+ 

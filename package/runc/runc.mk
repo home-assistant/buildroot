@@ -4,13 +4,13 @@
 #
 ################################################################################
 
-RUNC_VERSION = 1.2.4
+RUNC_VERSION = 1.2.5
 RUNC_SITE = $(call github,opencontainers,runc,v$(RUNC_VERSION))
 RUNC_LICENSE = Apache-2.0, LGPL-2.1 (libseccomp)
 RUNC_LICENSE_FILES = LICENSE
 RUNC_CPE_ID_VENDOR = linuxfoundation
 
-RUNC_LDFLAGS = -X main.version=$(RUNC_VERSION)
+RUNC_LDFLAGS = -X main.version=$(RUNC_VERSION)-haos
 RUNC_TAGS = cgo static_build
 
 ifeq ($(BR2_PACKAGE_LIBAPPARMOR),y)

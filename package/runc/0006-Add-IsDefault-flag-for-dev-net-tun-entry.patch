@@ -1,0 +1,23 @@
+From 951ad92b0220fbdbebe0fe3a2f34b27a81fe9542 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Jan=20=C4=8Cerm=C3=A1k?= <sairon@sairon.cz>
+Date: Tue, 11 Mar 2025 12:23:58 +0100
+Subject: [PATCH 6/6] Add IsDefault flag for /dev/net/tun entry
+
+This entry was added to the AllowedDevices list in v1.2.4, also flag it
+as default to get the special treatment the other default devices have.
+---
+ libcontainer/specconv/spec_linux.go | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/libcontainer/specconv/spec_linux.go b/libcontainer/specconv/spec_linux.go
+index cba86c30..3d5179a3 100644
+--- a/libcontainer/specconv/spec_linux.go
++++ b/libcontainer/specconv/spec_linux.go
+@@ -334,6 +334,7 @@ var AllowedDevices = []*devices.Device{
+ 	// or cumbersome to supply additional device rules, so we have to
+ 	// keep this for the sake of backward compatibility.
+ 	{
++		IsDefault: true,
+ 		Rule: devices.Rule{
+ 			Type:        devices.CharDevice,
+ 			Major:       10,

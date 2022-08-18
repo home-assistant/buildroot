@@ -1,5 +1,5 @@
 # From https://mirrors.edge.kernel.org/pub/linux/kernel/firmware/sha256sums.asc
-sha256  eeddb4e6bef31fd1a3757f12ccc324929bbad97855c0b9ec5ed780f74de1837d  linux-firmware-20211216.tar.xz
+sha256  0410ef41663a9d71959ac7241b6e487359c252c3b78db0a974f61d480745e0f9  linux-firmware-20220815.tar.xz
 
 # Hash for license files
 sha256  8116433f4004fc0c24d72b3d9e497808b724aa0e5e1cd63fc1bf66b715b1e2e9  LICENCE.Abilis

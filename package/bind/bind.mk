@@ -31,17 +31,11 @@ BIND_CONF_ENV = \
 	BUILD_CFLAGS="$(TARGET_CFLAGS)" \
 	LIBS=`$(PKG_CONFIG_HOST_BINARY) --libs openssl`
 BIND_CONF_OPTS = \
-	$(if $(BR2_TOOLCHAIN_HAS_THREADS),--enable-threads,--disable-threads) \
+	--without-cmocka \
 	--without-lmdb \
-	--with-json-c=no \
-	--with-randomdev=/dev/urandom \
 	--enable-epoll \
-	--enable-filter-aaaa \
 	--disable-backtrace \
-	--with-openssl=$(STAGING_DIR)/usr \
-	--with-ecdsa=yes \
-	--with-eddsa=no \
-	--with-aes=yes
+	--with-openssl=$(STAGING_DIR)/usr
 
 BIND_DEPENDENCIES = host-pkgconf libuv openssl
 
@@ -52,11 +46,25 @@ else
 BIND_CONF_OPTS += --without-zlib
 endif
 
+ifeq ($(BR2_PACKAGE_JSON_C),y)
+BIND_CONF_OPTS += --with-json-c
+BIND_DEPENDENCIES += json-c
+else
+BIND_CONF_OPTS += --without-json-c
+endif
+
 ifeq ($(BR2_PACKAGE_LIBCAP),y)
 BIND_CONF_OPTS += --enable-linux-caps
 BIND_DEPENDENCIES += libcap
 else
 BIND_CONF_OPTS += --disable-linux-caps
+endif
+
+ifeq ($(BR2_PACKAGE_LIBIDN2),y)
+BIND_CONF_OPTS += --with-libidn2
+BIND_DEPENDENCIES += libidn2
+else
+BIND_CONF_OPTS += --without-libidn2
 endif
 
 ifeq ($(BR2_PACKAGE_LIBKRB5),y)
@@ -66,18 +74,18 @@ else
 BIND_CONF_OPTS += --with-gssapi=no
 endif
 
+ifeq ($(BR2_PACKAGE_LIBMAXMINDDB),y)
+BIND_CONF_OPTS += --enable-geoip --with-maxminddb
+BIND_DEPENDENCIES += libmaxminddb
+else
+BIND_CONF_OPTS += --disable-geoip
+endif
+
 ifeq ($(BR2_PACKAGE_LIBXML2),y)
 BIND_CONF_OPTS += --with-libxml2
 BIND_DEPENDENCIES += libxml2
 else
 BIND_CONF_OPTS += --with-libxml2=no
-endif
-
-# GOST cipher support requires openssl extra engines
-ifeq ($(BR2_PACKAGE_OPENSSL_ENGINES),y)
-BIND_CONF_OPTS += --with-gost=yes
-else
-BIND_CONF_OPTS += --with-gost=no
 endif
 
 # Used by dnssec-keymgr

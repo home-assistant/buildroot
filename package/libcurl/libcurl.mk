@@ -15,6 +15,8 @@ LIBCURL_LICENSE_FILES = COPYING
 LIBCURL_CPE_ID_VENDOR = haxx
 LIBCURL_CPE_ID_PRODUCT = libcurl
 LIBCURL_INSTALL_STAGING = YES
+# We are patching configure.ac
+LIBCURL_AUTORECONF = YES
 
 # We disable NTLM support because it uses fork(), which doesn't work
 # on non-MMU platforms. Moreover, this authentication method is
@@ -30,6 +32,16 @@ ifeq ($(BR2_TOOLCHAIN_HAS_THREADS),y)
 LIBCURL_CONF_OPTS += --enable-threaded-resolver
 else
 LIBCURL_CONF_OPTS += --disable-threaded-resolver
+endif
+
+ifeq ($(BR2_TOOLCHAIN_HAS_LIBATOMIC),y)
+LIBCURL_CONF_OPTS += LIBS=-latomic
+endif
+
+ifeq ($(BR2_TOOLCHAIN_HAS_SYNC_1),)
+# Even though stdatomic.h does exist, link fails for __atomic_exchange_1
+# Work around this by pretending atomics aren't available.
+LIBCURL_CONF_ENV += ac_cv_header_stdatomic_h=no
 endif
 
 ifeq ($(BR2_PACKAGE_LIBCURL_VERBOSE),y)

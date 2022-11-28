@@ -49,6 +49,15 @@ else
 IPTABLES_CONF_OPTS += --disable-bpf-compiler --disable-nfsynproxy
 endif
 
+ifeq ($(BR2_PACKAGE_IPTABLES_NFTABLES_DEFAULT),y)
+define IPTABLES_INSTALL_SYMLINK
+	ln -fs xtables-nft-multi $(TARGET_DIR)/usr/sbin/iptables
+	ln -fs xtables-nft-multi $(TARGET_DIR)/usr/sbin/ip6tables
+endef
+
+IPTABLES_POST_INSTALL_TARGET_HOOKS += IPTABLES_INSTALL_SYMLINK
+endif
+
 define IPTABLES_LINUX_CONFIG_FIXUPS
 	$(call KCONFIG_ENABLE_OPT,CONFIG_IP_NF_IPTABLES)
 	$(call KCONFIG_ENABLE_OPT,CONFIG_IP_NF_FILTER)

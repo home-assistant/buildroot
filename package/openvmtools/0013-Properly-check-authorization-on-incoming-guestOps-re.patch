@@ -6,6 +6,9 @@ Subject: [PATCH] Properly check authorization on incoming guestOps requests
 
 Fix public pipe request checks.  Only a SessionRequest type should
 be accepted on the public pipe.
+
+Upstream: https://github.com/vmware/open-vm-tools/blob/CVE-2022-31676.patch/1205-Properly-check-authorization-on-incoming-guestOps-re.patch
+Signed-off-by: Stefan Agner <stefan@agner.ch>
 ---
  vgauth/serviceImpl/proto.c | 6 +++++-
  1 file changed, 5 insertions(+), 1 deletion(-)

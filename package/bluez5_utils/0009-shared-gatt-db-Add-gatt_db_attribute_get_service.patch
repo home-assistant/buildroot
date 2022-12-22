@@ -1,0 +1,52 @@
+From 8c39b4fc79ad91915031bcebff8f4c055a09aeff Mon Sep 17 00:00:00 2001
+Message-Id: <8c39b4fc79ad91915031bcebff8f4c055a09aeff.1671703778.git.stefan@agner.ch>
+In-Reply-To: <9abb3fc6095dc933a226116cdbbfd2b6779a41a6.1671703778.git.stefan@agner.ch>
+References: <9abb3fc6095dc933a226116cdbbfd2b6779a41a6.1671703778.git.stefan@agner.ch>
+From: Luiz Augusto von Dentz <luiz.von.dentz@intel.com>
+Date: Fri, 16 Dec 2022 16:56:05 -0800
+Subject: [PATCH] shared/gatt-db: Add gatt_db_attribute_get_service
+
+This adds gatt_db_attribute_get_service which can be used to get the
+service which the given attribute belongs to.
+---
+ src/shared/gatt-db.c | 9 +++++++++
+ src/shared/gatt-db.h | 3 +++
+ 2 files changed, 12 insertions(+)
+
+diff --git a/src/shared/gatt-db.c b/src/shared/gatt-db.c
+index 3a02289ce..ededc938a 100644
+--- a/src/shared/gatt-db.c
++++ b/src/shared/gatt-db.c
+@@ -1591,6 +1591,15 @@ uint16_t gatt_db_attribute_get_handle(const struct gatt_db_attribute *attrib)
+ 	return attrib->handle;
+ }
+ 
++struct gatt_db_attribute *
++gatt_db_attribute_get_service(const struct gatt_db_attribute *attrib)
++{
++	if (!attrib)
++		return NULL;
++
++	return attrib->service->attributes[0];
++}
++
+ bool gatt_db_attribute_get_service_uuid(const struct gatt_db_attribute *attrib,
+ 							bt_uuid_t *uuid)
+ {
+diff --git a/src/shared/gatt-db.h b/src/shared/gatt-db.h
+index 321a2aba6..cf1f41e8f 100644
+--- a/src/shared/gatt-db.h
++++ b/src/shared/gatt-db.h
+@@ -212,6 +212,9 @@ const bt_uuid_t *gatt_db_attribute_get_type(
+ 
+ uint16_t gatt_db_attribute_get_handle(const struct gatt_db_attribute *attrib);
+ 
++struct gatt_db_attribute *
++gatt_db_attribute_get_service(const struct gatt_db_attribute *attrib);
++
+ bool gatt_db_attribute_get_service_uuid(const struct gatt_db_attribute *attrib,
+ 							bt_uuid_t *uuid);
+ 
+-- 
+2.39.0
+

@@ -4,7 +4,7 @@
 #
 ################################################################################
 
-WIRESHARK_VERSION = 3.4.12
+WIRESHARK_VERSION = 3.4.16
 WIRESHARK_SOURCE = wireshark-$(WIRESHARK_VERSION).tar.xz
 WIRESHARK_SITE = https://www.wireshark.org/download/src/all-versions
 WIRESHARK_LICENSE = wireshark license
@@ -63,6 +63,13 @@ WIRESHARK_CONF_OPTS += -DENABLE_GNUTLS=ON
 WIRESHARK_DEPENDENCIES += gnutls
 else
 WIRESHARK_CONF_OPTS += -DENABLE_GNUTLS=OFF
+endif
+
+ifeq ($(BR2_PACKAGE_LIBCAP),y)
+WIRESHARK_CONF_OPTS += -DENABLE_CAP=ON
+WIRESHARK_DEPENDENCIES += libcap
+else
+WIRESHARK_CONF_OPTS += -DENABLE_CAP=OFF
 endif
 
 ifeq ($(BR2_PACKAGE_LIBKRB5),y)
@@ -155,6 +162,13 @@ WIRESHARK_CONF_OPTS += -DBUILD_sdjournal=ON
 WIRESHARK_DEPENDENCIES += systemd
 else
 WIRESHARK_CONF_OPTS += -DBUILD_sdjournal=OFF
+endif
+
+ifeq ($(BR2_PACKAGE_ZLIB),y)
+WIRESHARK_CONF_OPTS += -DENABLE_ZLIB=ON
+WIRESHARK_DEPENDENCIES += zlib
+else
+WIRESHARK_CONF_OPTS += -DENABLE_ZLIB=OFF
 endif
 
 ifeq ($(BR2_PACKAGE_ZSTD),y)

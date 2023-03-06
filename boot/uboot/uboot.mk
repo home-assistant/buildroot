@@ -183,10 +183,19 @@ ifeq ($(BR2_BINFMT_FDPIC),y)
 UBOOT_MAKE_OPTS += KCFLAGS=-mno-fdpic
 endif
 
+ifeq ($(BR2_TARGET_UBOOT_NEEDS_TPL),y)
+UBOOT_DEPENDENCIES += rockchip-blobs
+UBOOT_MAKE_OPTS += ROCKCHIP_TPL=ram_init.bin
+define UBOOT_COPY_TPL_FIRMWARE
+	cp $(BINARIES_DIR)/ram_init.bin $(@D)/
+endef
+UBOOT_PRE_BUILD_HOOKS += UBOOT_COPY_TPL_FIRMWARE
+endif
+
 ifeq ($(BR2_TARGET_UBOOT_NEEDS_ATF_BL31),y)
-UBOOT_DEPENDENCIES += arm-trusted-firmware
+UBOOT_DEPENDENCIES += rockchip-blobs
 ifeq ($(BR2_TARGET_UBOOT_NEEDS_ATF_BL31_ELF),y)
-UBOOT_MAKE_OPTS += BL31=$(BINARIES_DIR)/bl31.elf
+UBOOT_MAKE_OPTS += BL31=bl31.elf
 define UBOOT_COPY_ATF_FIRMWARE
 	cp $(BINARIES_DIR)/bl31.elf $(@D)/
 endef

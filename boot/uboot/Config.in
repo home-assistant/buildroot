@@ -208,9 +208,6 @@ config BR2_TARGET_UBOOT_NEEDS_XXD
 
 config BR2_TARGET_UBOOT_NEEDS_ATF_BL31
 	bool "U-Boot needs ATF BL31"
-	depends on BR2_TARGET_ARM_TRUSTED_FIRMWARE
-	depends on !BR2_TARGET_ARM_TRUSTED_FIRMWARE_UBOOT_AS_BL33
-	select BR2_TARGET_ARM_TRUSTED_FIRMWARE_BL31
 	help
 	  Some specific platforms (such as Allwinner A64/H5)
 	  encapsulate the BL31 part of ATF inside U-Boot. This option
@@ -230,6 +227,9 @@ config BR2_TARGET_UBOOT_NEEDS_ATF_BL31_ELF
 	bool "bl31.elf"
 
 endchoice
+
+config BR2_TARGET_UBOOT_NEEDS_TPL
+	bool "U-Boot needs TPL binary"
 
 config BR2_TARGET_UBOOT_NEEDS_OPTEE_TEE
 	bool "U-Boot needs OPTEE TEE"

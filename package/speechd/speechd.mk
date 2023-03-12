@@ -11,9 +11,25 @@ SPEECHD_LICENSE_FILES = COPYING.GPL-2 COPYING.GPL-3 COPYING.LGPL
 SPEECHD_INSTALL_STAGING = YES
 # speechd source code is released without configure script
 SPEECHD_AUTORECONF = YES
+SPEECHD_GETTEXTIZE = YES
 SPEECHD_DEPENDENCIES = host-pkgconf dotconf libglib2 libsndfile
 SPEECHD_CONF_ENV = ac_cv_prog_HELP2MAN=""
-SPEECHD_CONF_OPTS = --without-kali
+SPEECHD_CONF_OPTS = \
+	--disable-python \
+	--without-espeak \
+	--without-espeak-ng \
+	--without-flite \
+	--without-ibmtts \
+	--without-voxin \
+	--without-ivona \
+	--without-pico \
+	--without-baratinoo \
+	--without-kali \
+	--without-pulse \
+	--without-libao \
+	--without-alsa \
+	--with-oss \
+	--without-nas
 
 # fix missing config.rpath (needed for autoreconf) in the codebase
 define SPEECHD_TOUCH_CONFIG_RPATH
@@ -23,9 +39,9 @@ SPEECHD_PRE_CONFIGURE_HOOKS += SPEECHD_TOUCH_CONFIG_RPATH
 
 ifeq ($(BR2_PACKAGE_LIBTOOL),y)
 SPEECHD_DEPENDENCIES += libtool
-SPEECHD_CONF_OPTS += --with-libltdl
+SPEECHD_CONF_OPTS += --enable-ltdl
 else
-SPEECHD_CONF_OPTS += --without-libltdl
+SPEECHD_CONF_OPTS += --disable-ltdl
 endif
 
 define SPEECHD_INSTALL_INIT_SYSTEMD

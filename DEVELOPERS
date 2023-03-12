@@ -439,6 +439,7 @@ F:	package/pound/
 F:	package/pure-ftpd/
 F:	package/python-couchdb/
 F:	package/python-cssutils/
+F:	package/python-glslang/
 F:	package/python-mwclient/
 F:	package/python-mwscrape/
 F:	package/python-mwscrape2slob/
@@ -640,9 +641,19 @@ N:	Daniel J. Leach <dleach@belcan.com>
 F:	package/dacapo/
 
 N:	Daniel Lang <d.lang@abatec.at>
+F:	package/atkmm/
+F:	package/atkmm2_28/
+F:	package/cairomm/
+F:	package/cairomm1_14/
 F:	package/dbus-cxx/
+F:	package/glibmm/
+F:	package/glibmm2_66/
+F:	package/gtkmm3/
 F:	package/libsigc/
+F:	package/libsigc2/
 F:	package/paho-mqtt-cpp/
+F:	package/pangomm/
+F:	package/pangomm2_46/
 
 N:	Damien Lanson <damien@kal-host.com>
 F:	package/libvdpau/
@@ -1253,6 +1264,7 @@ F:	package/libnetconf2/
 F:	package/libyang/
 F:	package/linuxptp/
 F:	package/netopeer2/
+F:	package/rauc/
 F:	package/sysrepo/
 
 N:	Hervé Codina <herve.codina@bootlin.com>
@@ -1688,6 +1700,7 @@ F:	package/fluidsynth/
 F:	package/glslsandbox-player/
 F:	package/gnupg2/
 F:	package/highway/
+F:	package/kexec/
 F:	package/libjxl/
 F:	package/octave/
 F:	package/ola/

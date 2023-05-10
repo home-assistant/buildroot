@@ -4,7 +4,7 @@
 #
 ################################################################################
 
-LINUX_FIRMWARE_VERSION = 20221214
+LINUX_FIRMWARE_VERSION = 20230404
 LINUX_FIRMWARE_SOURCE = linux-firmware-$(LINUX_FIRMWARE_VERSION).tar.xz
 LINUX_FIRMWARE_SITE = $(BR2_KERNEL_MIRROR)/linux/kernel/firmware
 LINUX_FIRMWARE_INSTALL_IMAGES = YES
@@ -439,17 +439,17 @@ endif
 
 ifeq ($(BR2_PACKAGE_LINUX_FIRMWARE_IWLWIFI_22000),y)
 LINUX_FIRMWARE_FILES += \
-	iwlwifi-Qu-b0-hr-b0-66.ucode \
-	iwlwifi-Qu-c0-hr-b0-66.ucode \
-	iwlwifi-Qu-b0-jf-b0-66.ucode \
-	iwlwifi-Qu-c0-jf-b0-66.ucode \
-	iwlwifi-QuZ-a0-hr-b0-66.ucode \
-	iwlwifi-QuZ-a0-jf-b0-66.ucode \
-	iwlwifi-cc-a0-66.ucode \
-	iwlwifi-so-a0-jf-b0-64.ucode \
-	iwlwifi-so-a0-hr-b0-64.ucode \
-	iwlwifi-so-a0-gf-a0-64.ucode \
-	iwlwifi-ty-a0-gf-a0-66.ucode
+	iwlwifi-Qu-b0-hr-b0-72.ucode \
+	iwlwifi-Qu-c0-hr-b0-72.ucode \
+	iwlwifi-Qu-b0-jf-b0-72.ucode \
+	iwlwifi-Qu-c0-jf-b0-72.ucode \
+	iwlwifi-QuZ-a0-hr-b0-72.ucode \
+	iwlwifi-QuZ-a0-jf-b0-72.ucode \
+	iwlwifi-cc-a0-72.ucode \
+	iwlwifi-so-a0-jf-b0-72.ucode \
+	iwlwifi-so-a0-hr-b0-72.ucode \
+	iwlwifi-so-a0-gf-a0-72.ucode \
+	iwlwifi-ty-a0-gf-a0-72.ucode
 LINUX_FIRMWARE_ALL_LICENSE_FILES += LICENCE.iwlwifi_firmware
 endif
 

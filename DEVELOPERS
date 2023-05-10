@@ -273,6 +273,9 @@ F:	package/orbit/
 N:	Attila Wagner <attila.wagner@onyxinsight.com>
 F:	package/python-canopen/
 
+N:	Bagas Sanjaya <bagasdotme@gmail.com>
+F:	package/git/
+
 N:	Bartosz Bilas <b.bilas@grinn-global.com>
 F:	board/stmicroelectronics/stm32mp157a-dk1/
 F:	configs/stm32mp157a_dk1_defconfig
@@ -535,7 +538,7 @@ F:	package/syslog-ng/
 N:	Christian Kellermann <christian.kellermann@solectrix.de>
 F:	package/python-pylibftdi/
 
-N:	Christian Stewart <christian@paral.in>
+N:	Christian Stewart <christian@aperture.us>
 F:	package/balena-engine/
 F:	package/batman-adv/
 F:	package/catatonit/

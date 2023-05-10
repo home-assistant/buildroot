@@ -8,7 +8,6 @@ package/avahi/S05avahi-setup.sh Indent Variables
 package/avahi/S50avahi-daemon Indent Variables
 package/babeld/S50babeld Indent Shellcheck Variables
 package/bind/S81named Indent Shellcheck Variables
-package/bluez5_utils/S40bluetooth NotExecutable Variables
 package/boinc/S99boinc-client Indent Shellcheck Variables
 package/brickd/S70brickd Indent Shellcheck Variables
 package/brltty/S10brltty Indent Shellcheck Variables
@@ -94,7 +93,7 @@ package/libftdi/0002-libftdi.pc-requires-libusb-fix-static-build.patch Sob
 package/libiio/S99iiod Shellcheck Variables
 package/libmad/0001-mips-h-constraint-removal.patch Sob
 package/lighttpd/S50lighttpd EmptyLastLine Indent Shellcheck Variables
-package/linux-tools/S10hyperv Indent Variables
+package/linux-tools/S10hyperv Variables
 package/linuxptp/S65ptp4l Indent Shellcheck
 package/linuxptp/S66phc2sys Indent Shellcheck
 package/lirc-tools/S25lircd Indent Variables

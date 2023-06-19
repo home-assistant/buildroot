@@ -311,7 +311,7 @@ F:	package/taskd/
 N:	Benjamin Kamath <kamath.ben@gmail.com>
 F:	package/lapack/
 
-N:	Bernd Kuhls <bernd.kuhls@t-online.de>
+N:	Bernd Kuhls <bernd@kuhls.net>
 F:	package/alsa-lib/
 F:	package/alsa-utils/
 F:	package/apache/
@@ -662,7 +662,7 @@ N:	Damien Lanson <damien@kal-host.com>
 F:	package/libvdpau/
 F:	package/log4cpp/
 
-N:	Damien Le Moal <damien.lemoal@wdc.com>
+N:	Damien Le Moal <dlemoal@kernel.org>
 F:	package/python-kflash/
 F:	board/canaan/
 F:	configs/canaan_kd233_defconfig
@@ -860,7 +860,7 @@ F:	package/szip/
 N:	Esben Haabendal <esben@haabendal.dk>
 F:	package/python-kiwisolver/
 
-N:	Etienne Carriere <etienne.carriere@linaro.org>
+N:	Etienne Carriere <etienne.carriere@foss.st.com>
 F:	boot/optee-os/
 F:	package/optee-benchmark/
 F:	package/optee-client/
@@ -1707,6 +1707,7 @@ F:	package/kexec/
 F:	package/libjxl/
 F:	package/octave/
 F:	package/ola/
+F:	package/openblas/
 F:	package/openmpi/
 F:	package/perftest/
 F:	package/ptm2human/

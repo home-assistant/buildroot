@@ -1,0 +1,85 @@
+From cdbbbf52590673e0ebf7e019eaebd683686ae537 Mon Sep 17 00:00:00 2001
+Message-ID: <cdbbbf52590673e0ebf7e019eaebd683686ae537.1688558232.git.stefan@agner.ch>
+In-Reply-To: <2950cb121e2e2e2dbfb4c02b46f9344427101cb9.1688558232.git.stefan@agner.ch>
+References: <2950cb121e2e2e2dbfb4c02b46f9344427101cb9.1688558232.git.stefan@agner.ch>
+From: David Rheinsberg <david@readahead.eu>
+Date: Wed, 5 Jul 2023 09:54:12 +0200
+Subject: [PATCH] launch/config: use AT_RANDOM for XML hash salt
+
+Forward the entropy from AT_RANDOM to the hash-salt used by expat. Use
+XML_SetHashSalt() for this (available and fixed since expat-2.1).
+
+This fixes an issue where libexpat might read from `/dev/urandom` and
+thus block until the entropy pool is initialized. This hidden
+dependency is very hard to debug. Instead, we require the service
+launcher to delay startup until suitable entropy is available. This
+explicit dependency is much easier to manage, debug, and control.
+
+Reported-by: Stefan Agner <stefan@agner.ch>
+Signed-off-by: David Rheinsberg <david@readahead.eu>
+---
+ src/launch/config.c | 17 +++++++++++++++++
+ src/launch/config.h |  1 +
+ 2 files changed, 18 insertions(+)
+
+diff --git a/src/launch/config.c b/src/launch/config.c
+index 62682aa..c54f581 100644
+--- a/src/launch/config.c
++++ b/src/launch/config.c
+@@ -6,6 +6,7 @@
+ #include <c-stdaux.h>
+ #include <expat.h>
+ #include <stdlib.h>
++#include <sys/auxv.h>
+ #include "dbus/protocol.h"
+ #include "launch/config.h"
+ #include "launch/nss-cache.h"
+@@ -1227,10 +1228,25 @@ static void config_parser_blob_fn(void *userdata, const XML_Char *data, int n_da
+  * config_parser_init() - XXX
+  */
+ void config_parser_init(ConfigParser *parser) {
++        void *random;
++
+         *parser = (ConfigParser)CONFIG_PARSER_NULL(*parser);
+ 
+         parser->xml = XML_ParserCreate(NULL);
+         c_assert(parser->xml);
++
++        /*
++         * The hash-tables of libexpat require a reliable random seed.
++         * Depending on libexpat compilation flags, this might end up using
++         * `/dev/urandom` and thus block until random-initialization is
++         * finished. We avoid this hidden dependency and instead use the
++         * entropy provided via `AT_RANDOM`. Hence, entropy availability is
++         * tightly coupled to process startup, and it is the job of the
++         * service manager to order processes accordingly.
++         */
++        random = (void *)getauxval(AT_RANDOM);
++        c_assert(random);
++        c_memcpy(&parser->salt, random, sizeof(parser->salt));
+ }
+ 
+ /**
+@@ -1274,6 +1290,7 @@ static int config_parser_include(ConfigParser *parser, ConfigRoot *root, ConfigN
+         }
+ 
+         XML_ParserReset(parser->xml, NULL);
++        XML_SetHashSalt(parser->xml, parser->salt);
+         XML_SetUserData(parser->xml, &parser->state);
+         XML_SetElementHandler(parser->xml, config_parser_begin_fn, config_parser_end_fn);
+         XML_SetCharacterDataHandler(parser->xml, config_parser_blob_fn);
+diff --git a/src/launch/config.h b/src/launch/config.h
+index 881974a..4400f1f 100644
+--- a/src/launch/config.h
++++ b/src/launch/config.h
+@@ -220,6 +220,7 @@ struct ConfigRoot {
+ 
+ struct ConfigParser {
+         struct XML_ParserStruct *xml;
++        unsigned long salt;
+ 
+         struct ConfigState {
+                 NSSCache *nss;
+-- 
+2.41.0
+

@@ -4,24 +4,27 @@
 #
 ################################################################################
 
-OPENVMTOOLS_VERSION_MAJOR = 11.3.5
-OPENVMTOOLS_VERSION = $(OPENVMTOOLS_VERSION_MAJOR)-18557794
+OPENVMTOOLS_VERSION_MAJOR = 12.3.0
+OPENVMTOOLS_VERSION = $(OPENVMTOOLS_VERSION_MAJOR)-22234872
 OPENVMTOOLS_SITE = https://github.com/vmware/open-vm-tools/releases/download/stable-$(OPENVMTOOLS_VERSION_MAJOR)
 OPENVMTOOLS_SOURCE = open-vm-tools-$(OPENVMTOOLS_VERSION).tar.gz
 OPENVMTOOLS_LICENSE = LGPL-2.1
 OPENVMTOOLS_LICENSE_FILES = COPYING
 OPENVMTOOLS_CPE_ID_VENDOR = vmware
 OPENVMTOOLS_CPE_ID_PRODUCT = tools
+OPENVMTOOLS_CPE_ID_VERSION = $(OPENVMTOOLS_VERSION_MAJOR)
 
-# 0013-Properly-check-authorization-on-incoming-guestOps-re.patch
-OPENVMTOOLS_IGNORE_CVES += CVE-2022-31676
+# False positives: CVEs are for open-vm-tools predecessor vm-support 0.88
+OPENVMTOOLS_IGNORE_CVES = CVE-2014-4199 CVE-2014-4200
 
 # configure.ac is patched
 OPENVMTOOLS_AUTORECONF = YES
 OPENVMTOOLS_CONF_OPTS = --with-dnet \
 	--without-icu --without-x --without-gtk2 \
 	--without-gtkmm --without-kernel-modules \
-	--disable-deploypkg --without-xerces
+	--disable-deploypkg --without-xerces \
+	--disable-vgauth --disable-containerinfo
+
 OPENVMTOOLS_CONF_ENV += \
 	CUSTOM_DNET_CPPFLAGS=" " \
 	LIBS=$(TARGET_NLS_LIBS)
@@ -32,12 +35,19 @@ OPENVMTOOLS_DEPENDENCIES = \
 	$(TARGET_NLS_DEPENDENCIES)
 
 ifeq ($(BR2_PACKAGE_LIBTIRPC),y)
+OPENVMTOOLS_CONF_OPTS += --with-tirpc
 OPENVMTOOLS_DEPENDENCIES += libtirpc
+else
+OPENVMTOOLS_CONF_OPTS += --without-tirpc
 endif
 
 # When libfuse is available, openvmtools can build vmblock-fuse, so
 # make sure that libfuse gets built first
-ifeq ($(BR2_PACKAGE_LIBFUSE),y)
+ifeq ($(BR2_PACKAGE_LIBFUSE3),y)
+OPENVMTOOLS_CONF_OPTS += --with-fuse=fuse3
+OPENVMTOOLS_DEPENDENCIES += libfuse3
+else ifeq ($(BR2_PACKAGE_LIBFUSE),y)
+OPENVMTOOLS_CONF_OPTS += --with-fuse=fuse
 OPENVMTOOLS_DEPENDENCIES += libfuse
 endif
 

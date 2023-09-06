@@ -30,6 +30,7 @@ PIPEWIRE_CONF_OPTS += \
 	-Dvideoconvert=enabled \
 	-Dvideotestsrc=enabled \
 	-Dvolume=enabled \
+	-Dvulkan=disabled \
 	-Dsession-managers=[] \
 	-Dlegacy-rtkit=false \
 	-Davb=disabled \
@@ -178,13 +179,6 @@ PIPEWIRE_CONF_OPTS += -Dlibusb=enabled
 PIPEWIRE_DEPENDENCIES += libusb
 else
 PIPEWIRE_CONF_OPTS += -Dlibusb=disabled
-endif
-
-ifeq ($(BR2_PACKAGE_MESA3D_VULKAN_DRIVER),y)
-PIPEWIRE_CONF_OPTS += -Dvulkan=enabled
-PIPEWIRE_DEPENDENCIES += mesa3d
-else
-PIPEWIRE_CONF_OPTS += -Dvulkan=disabled
 endif
 
 ifeq ($(BR2_PACKAGE_LIBSNDFILE),y)

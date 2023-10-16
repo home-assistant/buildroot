@@ -90,9 +90,9 @@ all:
 .PHONY: all
 
 # Set and export the version string
-export BR2_VERSION := 2023.02.5
+export BR2_VERSION := 2023.02.6
 # Actual time the release is cut (for reproducible builds)
-BR2_VERSION_EPOCH = 1695815000
+BR2_VERSION_EPOCH = 1697444000
 
 # Save running make version since it's clobbered by the make package
 RUNNING_MAKE_VERSION := $(MAKE_VERSION)
@@ -1269,5 +1269,8 @@ include docs/manual/manual.mk
 -include $(foreach dir,$(BR2_EXTERNAL_DIRS),$(sort $(wildcard $(dir)/docs/*/*.mk)))
 
 .PHONY: $(noconfig_targets)
+
+# .WAIT was introduced in make 4.4. For older make, define it as phony.
+.PHONY: .WAIT
 
 endif #umask / $(CURDIR) / $(O)

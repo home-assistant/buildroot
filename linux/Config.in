@@ -434,6 +434,12 @@ config BR2_LINUX_KERNEL_DTB_OVERLAY_SUPPORT
 	  Choose this option to support Device Tree overlays
 	  on the target system.
 
+config BR2_LINUX_KERNEL_INSTALL_INTREE_OVERLAYS
+	bool "Deploy in-tree Device Tree overlays"
+	help
+	  Deploy in-tree device tree overlays stored in
+	  the architectures device tree directory overlays/.
+
 endif
 
 config BR2_LINUX_KERNEL_INSTALL_TARGET

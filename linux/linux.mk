@@ -498,6 +498,14 @@ define LINUX_INSTALL_DTB
 	)
 endef
 endif # BR2_LINUX_KERNEL_APPENDED_DTB
+ifeq ($(BR2_LINUX_KERNEL_INSTALL_INTREE_OVERLAYS),y)
+define LINUX_INSTALL_OVERLAYS
+	$(foreach ovldtb,$(wildcard $(LINUX_ARCH_PATH)/boot/dts/overlays/*.dtbo), \
+		$(INSTALL) -D -m 0644 $(ovldtb) $(1)/overlays/$(notdir $(ovldtb))
+	)
+	$(INSTALL) -D -m 0644 $(LINUX_ARCH_PATH)/boot/dts/overlays/overlay_map.dtb $(1)/overlays/
+endef
+endif # BR2_LINUX_KERNEL_INSTALL_INTREE_OVERLAYS
 endif # BR2_LINUX_KERNEL_DTB_IS_SELF_BUILT
 endif # BR2_LINUX_KERNEL_DTS_SUPPORT
 
@@ -569,6 +577,7 @@ ifeq ($(BR2_LINUX_KERNEL_INSTALL_TARGET),y)
 define LINUX_INSTALL_KERNEL_IMAGE_TO_TARGET
 	$(call LINUX_INSTALL_IMAGE,$(TARGET_DIR)/boot)
 	$(call LINUX_INSTALL_DTB,$(TARGET_DIR)/boot)
+	$(call LINUX_INSTALL_OVERLAYS,$(TARGET_DIR)/boot)
 endef
 endif
 
@@ -583,6 +592,7 @@ endef
 define LINUX_INSTALL_IMAGES_CMDS
 	$(call LINUX_INSTALL_IMAGE,$(BINARIES_DIR))
 	$(call LINUX_INSTALL_DTB,$(BINARIES_DIR))
+	$(call LINUX_INSTALL_OVERLAYS,$(BINARIES_DIR))
 endef
 
 ifeq ($(BR2_STRIP_strip),y)

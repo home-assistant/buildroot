@@ -447,7 +447,7 @@ endef
 endif # BR2_LINUX_KERNEL_APPENDED_DTB
 ifeq ($(BR2_LINUX_KERNEL_INSTALL_INTREE_OVERLAYS),y)
 define LINUX_INSTALL_OVERLAYS
-	install -t $(1)/overlays/ \
+	install -D -t $(1)/overlays/ \
 			$(wildcard $(LINUX_ARCH_PATH)/boot/dts/overlays/*.dtbo)
 endef
 endif # BR2_LINUX_KERNEL_INSTALL_INTREE_OVERLAYS
@@ -536,6 +536,7 @@ endef
 define LINUX_INSTALL_IMAGES_CMDS
 	$(call LINUX_INSTALL_IMAGE,$(BINARIES_DIR))
 	$(call LINUX_INSTALL_DTB,$(BINARIES_DIR))
+	$(call LINUX_INSTALL_OVERLAYS,$(BINARIES_DIR))
 endef
 
 ifeq ($(BR2_STRIP_strip),y)

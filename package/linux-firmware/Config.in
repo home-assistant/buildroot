@@ -8,6 +8,32 @@ config BR2_PACKAGE_LINUX_FIRMWARE
 
 if BR2_PACKAGE_LINUX_FIRMWARE
 
+config BR2_PACKAGE_LINUX_FIRMWARE_COMPRESS
+    bool "Compress firmware files"
+    help
+      Compress firmware files to save space in the root filesystem. This
+      is not as efficient as whole root filesystem compression, but it
+      is better performance-wise, because the firmwares are usually
+      accessed only when the driver is loaded.
+
+if BR2_PACKAGE_LINUX_FIRMWARE_COMPRESS
+
+choice
+	prompt "Compression algorithm"
+	default BR2_PACKAGE_LINUX_FIRMWARE_COMPRESS_XZ
+	help
+	  Select the compression algorithm to use for the firmware files.
+
+config BR2_PACKAGE_LINUX_FIRMWARE_COMPRESS_XZ
+	bool "xz"
+
+config BR2_PACKAGE_LINUX_FIRMWARE_COMPRESS_ZSTD
+	bool "zstd"
+
+endchoice
+
+endif
+
 menu "Audio firmware"
 
 config BR2_PACKAGE_LINUX_FIRMWARE_INTEL_SST_DSP

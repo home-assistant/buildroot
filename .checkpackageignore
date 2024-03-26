@@ -197,7 +197,6 @@ package/binutils/2.39/0001-sh-conf.patch Upstream
 package/binutils/2.39/0002-poison-system-directories.patch Upstream
 package/binutils/2.39/0003-bfd-elf32-or1k-fix-building-with-gcc-version-5.patch Upstream
 package/bird/0001-configure.ac-fix-build-with-autoconf-2.70.patch Upstream
-package/bitcoin/0001-src-randomenv.cpp-fix-build-on-uclibc.patch Upstream
 package/bmx7/0001-Fix-schedule.c-378-36-error-SIOCGSTAMP-undeclared.patch Upstream
 package/bmx7/0002-Fix-linking-error.patch Upstream
 package/bmx7/0003-Reorder-includes-to-avoid-ethhdr-collision.patch Upstream
@@ -463,7 +462,6 @@ package/genromfs/0001-build-system.patch Sob Upstream
 package/gensio/0001-Fix-missing-EVP_PKEY_ED25519-build-error-on-libressl.patch Upstream
 package/gerbera/S99gerbera Indent
 package/giblib/0001-fix-imlib2-detection.patch Upstream
-package/giflib/0001-Makefile-add-targets-to-manage-static-building.patch Upstream
 package/git-crypt/0001-fix-build-with-libressl-3.5.0.patch Upstream
 package/glog/0001-added-emscripten-support.patch Upstream
 package/glorytun/0001-Add-support-for-Apple-silicon.patch Upstream
@@ -1034,9 +1032,6 @@ package/ptpd2/0002-ntp_isc_md5-rename-EVP_MD_CTX-into-PTPD_EVP_MD_CTX.patch Upst
 package/ptpd2/0003-Solve-issue-25-Removing-type-U64-from-net-snmp-relat.patch Upstream
 package/ptpd2/S65ptpd2 Indent Shellcheck Variables
 package/pulseaudio/0001-shm.c-use-_Static_assert-instead-of-static_assert-fo.patch Upstream
-package/pulseaudio/0002-build-sys-Fix-atomic-support-detection.patch Upstream
-package/pulseaudio/0003-build-sys-Add-missing-libatomic_ops-dependencies.patch Upstream
-package/pulseaudio/0004-meson.build-fix-build-without-C.patch Upstream
 package/pulseaudio/S50pulseaudio ConsecutiveEmptyLines EmptyLastLine Indent Variables
 package/pulseview/0001-Replace-obsolete-deprecated-Qt-methods.patch Upstream
 package/pulseview/0002-Fix-broken-build-due-to-C-template-behind-C-linkage.patch Upstream

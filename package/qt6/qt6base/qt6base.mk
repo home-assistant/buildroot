@@ -18,7 +18,7 @@ QT6BASE_IGNORE_CVES += CVE-2023-32763
 # 0009-QXmlStreamReader-Raise-error-on-unexpected-tokens.patch
 QT6BASE_IGNORE_CVES += CVE-2023-38197
 # 0011-HPack-fix-incorrect-integer-overflow-check.patch
-QT6BASE_IGNORE_CVES += CVE-2023-38197
+QT6BASE_IGNORE_CVES += CVE-2023-51714
 # 0013-QXmlStreamReader-make-fastScanName-indicate-parsing-.patch
 QT6BASE_IGNORE_CVES += CVE-2023-37369
 # 0014-Schannel-Reject-certificate-not-signed-by-a-configur.patch
@@ -26,6 +26,14 @@ QT6BASE_IGNORE_CVES += CVE-2023-37369
 QT6BASE_IGNORE_CVES += CVE-2023-34410
 # 0016-HTTP2-Delay-any-communication-until-encrypted-can-be.patch
 QT6BASE_IGNORE_CVES += CVE-2024-39936
+
+# All Qt CVEs are reported by NVD against the qt:qt vendor/product
+# CPE, so from a Buildroot perspective, they will all show up reported
+# on qt6base. The ignore CVE entries below are for other Qt modules,
+# but they need to be listed here to be properly accounted for.
+
+# qt6svg/0001-QSvgFont-Initialize-used-member-remove-unused.patch
+QT6BASE_IGNORE_CVES += CVE-2023-32573
 
 QT6BASE_CMAKE_BACKEND = ninja
 

@@ -537,11 +537,12 @@ LINUX_FIRMWARE_IWL8000_UCODE_API_MAX = 36
 LINUX_FIRMWARE_IWL8265_UCODE_API_MAX = 36
 LINUX_FIRMWARE_IWL9000_UCODE_API_MAX = 46
 LINUX_FIRMWARE_IWL_22000_UCODE_API_MAX = 77
-LINUX_FIRMWARE_AX210_UCODE_API_MAX = 83
+LINUX_FIRMWARE_IWL_AX210_UCODE_API_MAX = 89
 # The 9560 driver has maximum ucode API defined in ax210.c yet its versions
 # are seemingly tracking the 22000 series.
-LINUX_FIRMWARE_AX210_UCODE_API_MAX_9560 = 77
-LINUX_FIRMWARE_IWL_BZ_UCODE_API_MAX = 83
+LINUX_FIRMWARE_IWL_AX210_UCODE_API_MAX_9560 = 77
+# Capped by linux-firmware, Linux 6.12 has max 93 (but min 90)
+LINUX_FIRMWARE_IWL_BZ_UCODE_API_MAX = 90
 
 ifeq ($(BR2_PACKAGE_LINUX_FIRMWARE_IWLWIFI_22000),y)
 LINUX_FIRMWARE_FILES += \
@@ -635,11 +636,11 @@ endif
 # it only has firmware only up to version 77, like other in 22000.
 ifeq ($(BR2_PACKAGE_LINUX_FIRMWARE_IWLWIFI_6E),y)
 LINUX_FIRMWARE_FILES += \
-	iwlwifi-so-a0-jf-b0-$(LINUX_FIRMWARE_AX210_UCODE_API_MAX_9560).ucode \
-	iwlwifi-so-a0-hr-b0-$(LINUX_FIRMWARE_AX210_UCODE_API_MAX).ucode \
-	iwlwifi-so-a0-gf-a0-$(LINUX_FIRMWARE_AX210_UCODE_API_MAX).ucode \
+	iwlwifi-so-a0-jf-b0-$(LINUX_FIRMWARE_IWL_AX210_UCODE_API_MAX_9560).ucode \
+	iwlwifi-so-a0-hr-b0-$(LINUX_FIRMWARE_IWL_AX210_UCODE_API_MAX).ucode \
+	iwlwifi-so-a0-gf-a0-$(LINUX_FIRMWARE_IWL_AX210_UCODE_API_MAX).ucode \
 	iwlwifi-so-a0-gf-a0.pnvm \
-	iwlwifi-ty-a0-gf-a0-$(LINUX_FIRMWARE_AX210_UCODE_API_MAX).ucode \
+	iwlwifi-ty-a0-gf-a0-$(LINUX_FIRMWARE_IWL_AX210_UCODE_API_MAX).ucode \
 	iwlwifi-ty-a0-gf-a0.pnvm
 LINUX_FIRMWARE_ALL_LICENSE_FILES += LICENCE.iwlwifi_firmware
 endif

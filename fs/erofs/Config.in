@@ -12,6 +12,20 @@ choice
 	help
 	  Select the EROFS compression algorithm to use.
 
+	  LZ4HC (LZ4 High Compression) is the default algorithm and
+	  provides a good balance between compression ratio and speed,
+	  with increasing levels the compression ratio increases at the
+	  penalty of higher compression times, without significant
+	  decompression penalty.
+
+	  LZMA provides the best compression ratio but is significantly
+	  slower both in compression and decompression, and higher
+	  compression levels can have noticeable memory requirements.
+
+	  Custom compression allows for advanced configuration of the
+	  compression algorithms, and adds the possibility of
+	  finegrained per-file compression using compression hints.
+
 config BR2_TARGET_ROOTFS_EROFS_NONE
 	bool "no compression"
 
@@ -23,6 +37,9 @@ config BR2_TARGET_ROOTFS_EROFS_LZ4HC
 
 config BR2_TARGET_ROOTFS_EROFS_LZMA
 	bool "lzma"
+
+config BR2_TARGET_ROOTFS_EROFS_CUSTOM_COMPRESSION
+	bool "custom"
 
 endchoice
 
@@ -47,6 +64,35 @@ config BR2_TARGET_ROOTFS_EROFS_LZMA_LEVEL
 	  Specify the compression level for lzma compression.
 	  Values from 0 to 9 are used for the standard compression,
 	  values from 100 to 109 are used for the extreme compression.
+
+endif # BR2_TARGET_ROOTFS_EROFS_LZMA
+
+if BR2_TARGET_ROOTFS_EROFS_CUSTOM_COMPRESSION
+
+config BR2_TARGET_ROOTFS_EROFS_COMPRESSION_ALGORITHMS
+	string "compression algorithms"
+	default "lz4hc,12"
+	help
+	  Specify arbitrary compression option, useful in combination
+	  with compression hints. Individual algorithms are separated
+	  by colon with optional level, e.g. "lz4hc,12:lzma".
+	  See erofs-utils documentaion for detailed information.
+
+config BR2_TARGET_ROOTFS_EROFS_COMPRESSION_HINTS
+	string "path to compression hints file"
+	default ""
+	help
+	  Path to file containing compression hints. Each line in the
+	  file is defined by tokens separated by spaces in the
+	  following form. Optionally, instead of the given primary
+	  algorithm, algorithms can be specified with zero-based
+	  algorithm-index explicitly:
+
+	  <pcluster-size-in-bytes> [algorithm-index] <match-pattern>
+
+	  match-patterns are extended regular expressions, matched
+	  against absolute paths within the output filesystem, with no
+	  leading /.
 
 endif # BR2_TARGET_ROOTFS_EROFS_LZMA
 

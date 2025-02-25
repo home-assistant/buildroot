@@ -4,13 +4,17 @@
 #
 ################################################################################
 
-ASSIMP_VERSION = 5.3.1
+ASSIMP_VERSION = 5.4.3
 ASSIMP_SITE = $(call github,assimp,assimp,v$(ASSIMP_VERSION))
 ASSIMP_LICENSE = BSD-3-Clause
 ASSIMP_LICENSE_FILES = LICENSE
 ASSIMP_CPE_ID_VENDOR = assimp
 ASSIMP_DEPENDENCIES = zlib
 ASSIMP_INSTALL_STAGING = YES
+
+# 0001-Fix-leak-5762.patch
+# 0002-Fix-use-after-free-in-the-CallbackToLogRedirector-59.patch
+ASSIMP_IGNORE_CVES += CVE-2024-48423
 
 # relocation truncated to fit: R_68K_GOT16O. We also need to disable
 # optimizations to not run into "Error: value -43420 out of range"

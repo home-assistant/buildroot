@@ -1,25 +1,21 @@
-From 9fb0e3c66d89da615f4c60a79328f405d98bc53e Mon Sep 17 00:00:00 2001
-Message-Id: <9fb0e3c66d89da615f4c60a79328f405d98bc53e.1659958805.git.stefan@agner.ch>
-In-Reply-To: <410089ea4bb8bf051a941febd087b0346b967a10.1659958805.git.stefan@agner.ch>
-References: <410089ea4bb8bf051a941febd087b0346b967a10.1659958805.git.stefan@agner.ch>
+From cce77c93e4dce47fd22fced5e71a8a1acc045ae9 Mon Sep 17 00:00:00 2001
 From: Stefan Agner <stefan@agner.ch>
 Date: Fri, 5 Aug 2022 13:03:21 +0200
-Subject: [PATCH 06/11] Add integration tests for device updates
+Subject: [PATCH 4/4] Add integration tests for device updates
 
 Signed-off-by: Stefan Agner <stefan@agner.ch>
 ---
- tests/integration/update.bats | 56 +++++++++++++++++++++++++++++++++++
- 1 file changed, 56 insertions(+)
+ tests/integration/update.bats | 62 +++++++++++++++++++++++++++++++++++
+ 1 file changed, 62 insertions(+)
 
 diff --git a/tests/integration/update.bats b/tests/integration/update.bats
-index 01c69152..9e94837c 100644
+index 4d928c42..a5f9a5bb 100644
 --- a/tests/integration/update.bats
 +++ b/tests/integration/update.bats
-@@ -681,6 +681,62 @@ EOF
+@@ -827,6 +827,68 @@ EOF
  	[ -z "$(<"$CONTAINER_OUTPUT")" ]
  }
  
-+
 +@test "update devices" {
 +	requires root
 +
@@ -41,6 +37,10 @@ index 01c69152..9e94837c 100644
 +	runc exec test_update_devices head -c 100 /dev/kmsg
 +	[ "$status" -eq 1 ]
 +
++	# Make sure default devices still work
++	runc exec test_update_devices cat /dev/null
++	[ "$status" -eq 0 ]
++
 +	runc update --resources - test_update_devices <<EOF
 +	{
 +		"devices": [
@@ -52,6 +52,9 @@ index 01c69152..9e94837c 100644
 +	runc exec test_update_devices head -c 100 /dev/kmsg
 +	[ "$status" -eq 0 ]
 +
++	# Make sure default devices still work
++	runc exec test_update_devices cat /dev/null
++	[ "$status" -eq 0 ]
 +
 +	# Not updating devices should keep device access
 +	# For backwards compatibility
@@ -76,8 +79,5 @@ index 01c69152..9e94837c 100644
 +}
 +
  @test "update paused container" {
- 	[[ "$ROOTLESS" -ne 0 ]] && requires rootless_cgroup
  	requires cgroups_freezer
--- 
-2.37.1
-
+ 	[ $EUID -ne 0 ] && requires rootless_cgroup

@@ -531,8 +531,8 @@ LINUX_FIRMWARE_IWL_AX210_UCODE_API_MAX = 89
 # The 9560 driver has maximum ucode API defined in ax210.c yet its versions
 # are seemingly tracking the 22000 series.
 LINUX_FIRMWARE_IWL_AX210_UCODE_API_MAX_9560 = 77
-# Capped by linux-firmware, Linux 6.12 has max 93 (but min 90)
-LINUX_FIRMWARE_IWL_BZ_UCODE_API_MAX = 90
+# Linux 6.12 has max 93 but only 92 is present in linux-firmware
+LINUX_FIRMWARE_IWL_BZ_UCODE_API_MAX = 92
 
 ifeq ($(BR2_PACKAGE_LINUX_FIRMWARE_IWLWIFI_22000),y)
 LINUX_FIRMWARE_FILES += \

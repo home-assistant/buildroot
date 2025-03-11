@@ -1,7 +1,7 @@
 From a2210d008b96f20b39a6e2075b2702bfe24da2a0 Mon Sep 17 00:00:00 2001
 From: Stefan Agner <stefan@agner.ch>
 Date: Mon, 8 Aug 2022 13:39:26 +0200
-Subject: [PATCH 5/5] Incremental update device permission
+Subject: [PATCH 5/6] Incremental update device permission
 
 ---
  update.go | 5 +----

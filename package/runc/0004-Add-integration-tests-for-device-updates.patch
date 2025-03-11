@@ -1,7 +1,7 @@
 From 18a44099acf8ddd13cc5f1bca1d4d52931c6e12c Mon Sep 17 00:00:00 2001
 From: Stefan Agner <stefan@agner.ch>
 Date: Fri, 5 Aug 2022 13:03:21 +0200
-Subject: [PATCH 4/5] Add integration tests for device updates
+Subject: [PATCH 4/6] Add integration tests for device updates
 
 Signed-off-by: Stefan Agner <stefan@agner.ch>
 ---

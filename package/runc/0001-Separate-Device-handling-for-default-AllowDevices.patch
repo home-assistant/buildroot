@@ -1,7 +1,7 @@
-From c40c8446567dae76840b240b415bf11caefc5399 Mon Sep 17 00:00:00 2001
+From 1b693e2ef1548df6e66639785812f235642ab715 Mon Sep 17 00:00:00 2001
 From: Stefan Agner <stefan@agner.ch>
 Date: Thu, 3 Mar 2022 14:24:37 +0100
-Subject: [PATCH 1/4] Separate Device handling for default AllowDevices
+Subject: [PATCH 1/5] Separate Device handling for default AllowDevices
 
 Signed-off-by: Stefan Agner <stefan@agner.ch>
 ---

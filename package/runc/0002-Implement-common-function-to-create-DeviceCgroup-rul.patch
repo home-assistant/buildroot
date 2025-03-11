@@ -1,7 +1,7 @@
 From 29f032b3562d160c83bcaa678251150102e94d45 Mon Sep 17 00:00:00 2001
 From: Stefan Agner <stefan@agner.ch>
 Date: Thu, 3 Mar 2022 14:55:53 +0100
-Subject: [PATCH 2/5] Implement common function to create DeviceCgroup rules
+Subject: [PATCH 2/6] Implement common function to create DeviceCgroup rules
 
 Signed-off-by: Stefan Agner <stefan@agner.ch>
 ---

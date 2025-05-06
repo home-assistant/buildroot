@@ -4,7 +4,7 @@
 #
 ################################################################################
 
-BRCMFMAC_SDIO_FIRMWARE_RPI_VERSION = 26ff205b45dc109b498a70aaf182804ad9dbfea5
+BRCMFMAC_SDIO_FIRMWARE_RPI_VERSION = 4eec7f2ef1aefc2a432eaf840d7034bf15d2fbb9
 BRCMFMAC_SDIO_FIRMWARE_RPI_SITE = $(call github,LibreELEC,brcmfmac_sdio-firmware-rpi,$(BRCMFMAC_SDIO_FIRMWARE_RPI_VERSION))
 BRCMFMAC_SDIO_FIRMWARE_RPI_LICENSE = PROPRIETARY
 BRCMFMAC_SDIO_FIRMWARE_RPI_LICENSE_FILES = LICENSE
@@ -58,6 +58,9 @@ define BRCMFMAC_SDIO_FIRMWARE_RPI_INSTALL_TARGET_WIFI
 	ln -sf brcmfmac43436-sdio.txt $(TARGET_DIR)/lib/firmware/brcm/brcmfmac43436-sdio.raspberrypi,model-zero-2-w.txt
 	ln -sf brcmfmac43436s-sdio.bin $(TARGET_DIR)/lib/firmware/brcm/brcmfmac43436s-sdio.raspberrypi,model-zero-2-w.bin
 	ln -sf brcmfmac43436s-sdio.txt $(TARGET_DIR)/lib/firmware/brcm/brcmfmac43436s-sdio.raspberrypi,model-zero-2-w.txt
+	ln -sf ../cypress/cyfmac43439-sdio.bin $(TARGET_DIR)/lib/firmware/brcm/brcmfmac43439-sdio.bin
+	ln -sf ../cypress/cyfmac43439-sdio.clm_blob $(TARGET_DIR)/lib/firmware/brcm/brcmfmac43439-sdio.clm_blob
+	ln -sf ../cypress/cyfmac43439-sdio.txt $(TARGET_DIR)/lib/firmware/brcm/brcmfmac43439-sdio.txt
 	ln -sf ../cypress/cyfmac43455-sdio.bin $(TARGET_DIR)/lib/firmware/brcm/brcmfmac43455-sdio.bin
 	ln -sf ../cypress/cyfmac43455-sdio.clm_blob $(TARGET_DIR)/lib/firmware/brcm/brcmfmac43455-sdio.clm_blob
 	ln -sf ../cypress/cyfmac43455-sdio.bin $(TARGET_DIR)/lib/firmware/brcm/brcmfmac43455-sdio.raspberrypi,3-model-a-plus.bin

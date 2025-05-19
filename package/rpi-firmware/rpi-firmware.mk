@@ -4,6 +4,7 @@
 #
 ################################################################################
 
+# Please keep in sync with configs/raspberrypi*_deconfig
 RPI_FIRMWARE_VERSION = bc7f439c234e19371115e07b57c366df59cc1bc7
 RPI_FIRMWARE_SITE = $(call github,raspberrypi,firmware,$(RPI_FIRMWARE_VERSION))
 RPI_FIRMWARE_LICENSE = BSD-3-Clause

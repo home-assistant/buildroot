@@ -636,6 +636,8 @@ endif
 # it only has firmware only up to version 77, like other in 22000.
 ifeq ($(BR2_PACKAGE_LINUX_FIRMWARE_IWLWIFI_6E),y)
 LINUX_FIRMWARE_FILES += \
+	iwlwifi-ma-b0-gf-a0-$(LINUX_FIRMWARE_IWL_AX210_UCODE_API_MAX).ucode \
+	iwlwifi-ma-b0-gf-a0.pnvm \
 	iwlwifi-so-a0-jf-b0-$(LINUX_FIRMWARE_IWL_AX210_UCODE_API_MAX_9560).ucode \
 	iwlwifi-so-a0-hr-b0-$(LINUX_FIRMWARE_IWL_AX210_UCODE_API_MAX).ucode \
 	iwlwifi-so-a0-gf-a0-$(LINUX_FIRMWARE_IWL_AX210_UCODE_API_MAX).ucode \

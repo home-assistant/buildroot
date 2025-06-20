@@ -1,7 +1,4 @@
-From 173f8a311b63e3a7505905dd51747030eba81ee0 Mon Sep 17 00:00:00 2001
-Message-ID: <173f8a311b63e3a7505905dd51747030eba81ee0.1693922825.git.stefan@agner.ch>
-In-Reply-To: <b978727972e1a8b7e3f14886395047e5809b7a81.1693922825.git.stefan@agner.ch>
-References: <b978727972e1a8b7e3f14886395047e5809b7a81.1693922825.git.stefan@agner.ch>
+From fa54bf232f96785c7b418818dbb26372be6b1f87 Mon Sep 17 00:00:00 2001
 From: Natanael Copa <ncopa@alpinelinux.org>
 Date: Wed, 18 Nov 2015 09:10:14 +0000
 Subject: [PATCH] Fix definition of ALLPERMS and ACCESSPERMS
@@ -23,7 +20,7 @@ Signed-off-by: Stefan Agner <stefan@agner.ch>
  2 files changed, 6 insertions(+), 5 deletions(-)
 
 diff --git a/lib/hgfsServer/hgfsServerLinux.c b/lib/hgfsServer/hgfsServerLinux.c
-index 4a0bc937..6ed49e2b 100644
+index 4a0bc93..6ed49e2 100644
 --- a/lib/hgfsServer/hgfsServerLinux.c
 +++ b/lib/hgfsServer/hgfsServerLinux.c
 @@ -105,11 +105,13 @@ typedef struct DirectoryEntry {
@@ -44,7 +41,7 @@ index 4a0bc937..6ed49e2b 100644
  #endif
  
 diff --git a/services/plugins/dndcp/dnd/dndLinux.c b/services/plugins/dndcp/dnd/dndLinux.c
-index 219065f7..b5b7e620 100644
+index 219065f..b5b7e62 100644
 --- a/services/plugins/dndcp/dnd/dndLinux.c
 +++ b/services/plugins/dndcp/dnd/dndLinux.c
 @@ -53,7 +53,7 @@
@@ -64,6 +61,3 @@ index 219065f7..b5b7e620 100644
  #endif
  
  
--- 
-2.42.0
-

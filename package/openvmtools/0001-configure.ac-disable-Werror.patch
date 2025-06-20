@@ -1,5 +1,4 @@
-From b978727972e1a8b7e3f14886395047e5809b7a81 Mon Sep 17 00:00:00 2001
-Message-ID: <b978727972e1a8b7e3f14886395047e5809b7a81.1693922825.git.stefan@agner.ch>
+From ba2d0f452140fbf48593dadfd272e0cbdbd38e48 Mon Sep 17 00:00:00 2001
 From: Stefan Agner <stefan@agner.ch>
 Date: Tue, 5 Sep 2023 13:11:18 +0200
 Subject: [PATCH] configure.ac: disable -Werror
@@ -14,10 +13,10 @@ Signed-off-by: Stefan Agner <stefan@agner.ch>
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/configure.ac b/configure.ac
-index 2d60c725..0ed3c9fc 100644
+index fcc3050..fd8e18d 100644
 --- a/configure.ac
 +++ b/configure.ac
-@@ -1451,7 +1451,7 @@ AC_C_VOLATILE
+@@ -1403,7 +1403,7 @@ AC_C_VOLATILE
  
  ### General flags / actions
  CFLAGS="$CFLAGS -Wall"
@@ -26,6 +25,3 @@ index 2d60c725..0ed3c9fc 100644
  
  # -Wno-unknown-pragmas is due to gcc not understanding '#pragma ident'
  # in Xlib.h on OpenSolaris.
--- 
-2.42.0
-

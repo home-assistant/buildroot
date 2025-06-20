@@ -1,7 +1,4 @@
-From 1dbf439465d70a9c666910ecc9a6582946048202 Mon Sep 17 00:00:00 2001
-Message-ID: <1dbf439465d70a9c666910ecc9a6582946048202.1693922825.git.stefan@agner.ch>
-In-Reply-To: <b978727972e1a8b7e3f14886395047e5809b7a81.1693922825.git.stefan@agner.ch>
-References: <b978727972e1a8b7e3f14886395047e5809b7a81.1693922825.git.stefan@agner.ch>
+From de754a3d48b419731f76841850cc7f2e872c2281 Mon Sep 17 00:00:00 2001
 From: Stefan Agner <stefan@agner.ch>
 Date: Tue, 5 Sep 2023 13:14:04 +0200
 Subject: [PATCH] m4: do not force -I/usr/include in CPPFLAGS
@@ -16,7 +13,7 @@ Signed-off-by: Stefan Agner <stefan@agner.ch>
  1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/m4/vmtools.m4 b/m4/vmtools.m4
-index 055b39d9..d281f81d 100644
+index 055b39d..d281f81 100644
 --- a/m4/vmtools.m4
 +++ b/m4/vmtools.m4
 @@ -279,10 +279,10 @@ AC_DEFUN([AC_VMW_DEFAULT_FLAGS],[
@@ -32,6 +29,3 @@ index 055b39d9..d281f81d 100644
        fi
     fi
  ])
--- 
-2.42.0
-

@@ -1,7 +1,4 @@
-From 7ab2810df0abd79419267d96e744ce880e229661 Mon Sep 17 00:00:00 2001
-Message-ID: <7ab2810df0abd79419267d96e744ce880e229661.1693922825.git.stefan@agner.ch>
-In-Reply-To: <b978727972e1a8b7e3f14886395047e5809b7a81.1693922825.git.stefan@agner.ch>
-References: <b978727972e1a8b7e3f14886395047e5809b7a81.1693922825.git.stefan@agner.ch>
+From 05bac3257a1470e176516dda59a7b52aab5090d1 Mon Sep 17 00:00:00 2001
 From: Natanael Copa <ncopa@alpinelinux.org>
 Date: Wed, 18 Nov 2015 10:05:07 +0000
 Subject: [PATCH] Use configure to test for feature instead of platform
@@ -34,10 +31,10 @@ Signed-off-by: Stefan Agner <stefan@agner.ch>
  3 files changed, 23 insertions(+), 17 deletions(-)
 
 diff --git a/configure.ac b/configure.ac
-index 48bfc09e..aff01c8c 100644
+index 698b929..987630e 100644
 --- a/configure.ac
 +++ b/configure.ac
-@@ -1169,6 +1169,7 @@ AC_CHECK_FUNCS(
+@@ -1121,6 +1121,7 @@ AC_CHECK_FUNCS(
  
  AC_CHECK_FUNCS([ecvt])
  AC_CHECK_FUNCS([fcvt])
@@ -45,7 +42,7 @@ index 48bfc09e..aff01c8c 100644
  
  AC_CHECK_FUNC([mkdtemp], [have_mkdtemp=yes])
  
-@@ -1378,10 +1379,13 @@ fi
+@@ -1330,10 +1331,13 @@ fi
  ###
  
  AC_CHECK_HEADERS([crypt.h])
@@ -60,7 +57,7 @@ index 48bfc09e..aff01c8c 100644
  AC_CHECK_HEADERS([sys/io.h])
  AC_CHECK_HEADERS([sys/param.h]) # Required to make the sys/user.h check work correctly on FreeBSD
 diff --git a/lib/misc/idLinux.c b/lib/misc/idLinux.c
-index 3d7d1e30..0e12ac5b 100644
+index 3d7d1e3..0e12ac5 100644
 --- a/lib/misc/idLinux.c
 +++ b/lib/misc/idLinux.c
 @@ -27,12 +27,9 @@
@@ -124,7 +121,7 @@ index 3d7d1e30..0e12ac5b 100644
  }
  #endif
 diff --git a/lib/nicInfo/nicInfoPosix.c b/lib/nicInfo/nicInfoPosix.c
-index 0135e6a0..6f20547b 100644
+index 0135e6a..6f20547 100644
 --- a/lib/nicInfo/nicInfoPosix.c
 +++ b/lib/nicInfo/nicInfoPosix.c
 @@ -35,9 +35,13 @@
@@ -142,6 +139,3 @@ index 0135e6a0..6f20547b 100644
  # include <net/if.h>
  #endif
  #ifndef NO_DNET
--- 
-2.42.0
-

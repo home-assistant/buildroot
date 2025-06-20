@@ -1,7 +1,4 @@
-From 21b87417e23de9e444ec02e93e42f72a3f9d4c02 Mon Sep 17 00:00:00 2001
-Message-ID: <21b87417e23de9e444ec02e93e42f72a3f9d4c02.1693922825.git.stefan@agner.ch>
-In-Reply-To: <b978727972e1a8b7e3f14886395047e5809b7a81.1693922825.git.stefan@agner.ch>
-References: <b978727972e1a8b7e3f14886395047e5809b7a81.1693922825.git.stefan@agner.ch>
+From a2a3bcf82cb20b7f5801cbf850ac99b81b7a51b7 Mon Sep 17 00:00:00 2001
 From: Fabrice Fontaine <fontaine.fabrice@gmail.com>
 Date: Mon, 30 Sep 2019 13:32:35 +0200
 Subject: [PATCH] Rename poll.h into vm_poll.h to fix build failure on musl
@@ -47,10 +44,10 @@ Signed-off-by: Stefan Agner <stefan@agner.ch>
  lib/include/{poll.h => vm_poll.h} | 0
  lib/rpcIn/rpcin.c                 | 2 +-
  6 files changed, 6 insertions(+), 6 deletions(-)
- rename open-vm-tools/lib/include/{poll.h => vm_poll.h} (100%)
+ rename lib/include/{poll.h => vm_poll.h} (100%)
 
 diff --git a/lib/asyncsocket/asyncsocket.c b/lib/asyncsocket/asyncsocket.c
-index 26aee553..684008d3 100644
+index d617776..3f75b85 100644
 --- a/lib/asyncsocket/asyncsocket.c
 +++ b/lib/asyncsocket/asyncsocket.c
 @@ -70,8 +70,8 @@
@@ -73,7 +70,7 @@ index 26aee553..684008d3 100644
  #include "err.h"
  #include "hostinfo.h"
 diff --git a/lib/hgfsServer/hgfsServer.c b/lib/hgfsServer/hgfsServer.c
-index c7b4cdd0..d6e0cdc0 100644
+index c7b4cdd..d6e0cdc 100644
 --- a/lib/hgfsServer/hgfsServer.c
 +++ b/lib/hgfsServer/hgfsServer.c
 @@ -51,7 +51,7 @@
@@ -86,7 +83,7 @@ index c7b4cdd0..d6e0cdc0 100644
  #include "vm_basic_asm.h"
  #include "unicodeOperations.h"
 diff --git a/lib/include/asyncsocket.h b/lib/include/asyncsocket.h
-index 09947002..3800f597 100644
+index 57d4915..283e2d7 100644
 --- a/lib/include/asyncsocket.h
 +++ b/lib/include/asyncsocket.h
 @@ -177,7 +177,7 @@ typedef struct AsyncSocket AsyncSocket;
@@ -99,7 +96,7 @@ index 09947002..3800f597 100644
  typedef struct AsyncSocketPollParams {
     int flags;               /* Default 0, only POLL_FLAG_NO_BULL is valid */
 diff --git a/lib/include/pollImpl.h b/lib/include/pollImpl.h
-index 46442e55..8bc66997 100644
+index 46442e5..8bc6699 100644
 --- a/lib/include/pollImpl.h
 +++ b/lib/include/pollImpl.h
 @@ -44,7 +44,7 @@
@@ -116,7 +113,7 @@ similarity index 100%
 rename from lib/include/poll.h
 rename to lib/include/vm_poll.h
 diff --git a/lib/rpcIn/rpcin.c b/lib/rpcIn/rpcin.c
-index f1709fe0..c1a5dfdb 100644
+index f1709fe..c1a5dfd 100644
 --- a/lib/rpcIn/rpcin.c
 +++ b/lib/rpcIn/rpcin.c
 @@ -57,7 +57,7 @@
@@ -128,6 +125,3 @@ index f1709fe0..c1a5dfdb 100644
  #  include "asyncsocket.h"
  #  include "vmci_defs.h"
  #include "dataMap.h"
--- 
-2.42.0
-

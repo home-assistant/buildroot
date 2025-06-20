@@ -4,8 +4,8 @@
 #
 ################################################################################
 
-OPENVMTOOLS_VERSION_MAJOR = 12.3.0
-OPENVMTOOLS_VERSION = $(OPENVMTOOLS_VERSION_MAJOR)-22234872
+OPENVMTOOLS_VERSION_MAJOR = 13.0.0
+OPENVMTOOLS_VERSION = $(OPENVMTOOLS_VERSION_MAJOR)-24696409
 OPENVMTOOLS_SITE = https://github.com/vmware/open-vm-tools/releases/download/stable-$(OPENVMTOOLS_VERSION_MAJOR)
 OPENVMTOOLS_SOURCE = open-vm-tools-$(OPENVMTOOLS_VERSION).tar.gz
 OPENVMTOOLS_LICENSE = LGPL-2.1

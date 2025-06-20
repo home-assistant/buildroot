@@ -1,7 +1,4 @@
-From f4c472478a42bfd69406b49aab778d2038e6dee3 Mon Sep 17 00:00:00 2001
-Message-ID: <f4c472478a42bfd69406b49aab778d2038e6dee3.1693922825.git.stefan@agner.ch>
-In-Reply-To: <b978727972e1a8b7e3f14886395047e5809b7a81.1693922825.git.stefan@agner.ch>
-References: <b978727972e1a8b7e3f14886395047e5809b7a81.1693922825.git.stefan@agner.ch>
+From f716ecb2cc9212bc858f4ae073d43e0a47c0f8a4 Mon Sep 17 00:00:00 2001
 From: Natanael Copa <ncopa@alpinelinux.org>
 Date: Wed, 18 Nov 2015 09:03:00 +0000
 Subject: [PATCH] Use configure test for struct timespec
@@ -21,10 +18,10 @@ Signed-off-by: Stefan Agner <stefan@agner.ch>
  2 files changed, 2 insertions(+), 7 deletions(-)
 
 diff --git a/configure.ac b/configure.ac
-index 0ed3c9fc..48bfc09e 100644
+index fd8e18d..698b929 100644
 --- a/configure.ac
 +++ b/configure.ac
-@@ -1441,6 +1441,7 @@ AC_TYPE_OFF_T
+@@ -1393,6 +1393,7 @@ AC_TYPE_OFF_T
  AC_TYPE_PID_T
  AC_TYPE_SIZE_T
  AC_CHECK_MEMBERS([struct stat.st_rdev])
@@ -33,7 +30,7 @@ index 0ed3c9fc..48bfc09e 100644
  AC_STRUCT_TM
  AC_C_VOLATILE
 diff --git a/lib/include/hgfsUtil.h b/lib/include/hgfsUtil.h
-index 609f4c00..a3a022d4 100644
+index 609f4c0..a3a022d 100644
 --- a/lib/include/hgfsUtil.h
 +++ b/lib/include/hgfsUtil.h
 @@ -53,13 +53,7 @@
@@ -51,6 +48,3 @@ index 609f4c00..a3a022d4 100644
  struct timespec {
     time_t tv_sec;
     long   tv_nsec;
--- 
-2.42.0
-

@@ -1,7 +1,4 @@
-From 640effa0a8cdf5d00efa329bcf8dfe01790b3fbb Mon Sep 17 00:00:00 2001
-Message-ID: <640effa0a8cdf5d00efa329bcf8dfe01790b3fbb.1693922825.git.stefan@agner.ch>
-In-Reply-To: <b978727972e1a8b7e3f14886395047e5809b7a81.1693922825.git.stefan@agner.ch>
-References: <b978727972e1a8b7e3f14886395047e5809b7a81.1693922825.git.stefan@agner.ch>
+From c9e9429036c705b2a126f99ba135268bbc843965 Mon Sep 17 00:00:00 2001
 From: Stefan Agner <stefan@agner.ch>
 Date: Tue, 5 Sep 2023 15:03:56 +0200
 Subject: [PATCH] Make HgfsConvertFromNtTimeNsec aware of 64-bit time_t on i386
@@ -24,7 +21,7 @@ Signed-off-by: Stefan Agner <stefan@agner.ch>
  1 file changed, 6 insertions(+), 4 deletions(-)
 
 diff --git a/lib/hgfs/hgfsUtil.c b/lib/hgfs/hgfsUtil.c
-index fcd7fb72..f8606156 100644
+index fcd7fb7..f860615 100644
 --- a/lib/hgfs/hgfsUtil.c
 +++ b/lib/hgfs/hgfsUtil.c
 @@ -131,13 +131,15 @@ HgfsConvertFromNtTimeNsec(struct timespec *unixTime, // OUT: Time in UNIX format
@@ -47,6 +44,3 @@ index fcd7fb72..f8606156 100644
  
     return 0;
  }
--- 
-2.42.0
-

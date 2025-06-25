@@ -22,10 +22,12 @@ endef
 
 define PIGZ_INSTALL_TARGET_CMDS
 	$(INSTALL) -D -m 0755 $(@D)/pigz $(TARGET_DIR)/usr/bin/pigz
+	ln -sf pigz $(TARGET_DIR)/usr/bin/unpigz
 endef
 
 define HOST_PIGZ_INSTALL_CMDS
 	$(INSTALL) -D -m 0755 $(@D)/pigz $(HOST_DIR)/bin/pigz
+	ln -sf pigz $(HOST_DIR)/usr/bin/unpigz
 endef
 
 $(eval $(generic-package))

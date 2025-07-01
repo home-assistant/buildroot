@@ -1,7 +1,7 @@
-From 951ad92b0220fbdbebe0fe3a2f34b27a81fe9542 Mon Sep 17 00:00:00 2001
+From f4c44d8188d92edb09297a0191f48fce7484321a Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Jan=20=C4=8Cerm=C3=A1k?= <sairon@sairon.cz>
 Date: Tue, 11 Mar 2025 12:23:58 +0100
-Subject: [PATCH 6/6] Add IsDefault flag for /dev/net/tun entry
+Subject: [PATCH] Add IsDefault flag for /dev/net/tun entry
 
 This entry was added to the AllowedDevices list in v1.2.4, also flag it
 as default to get the special treatment the other default devices have.
@@ -10,7 +10,7 @@ as default to get the special treatment the other default devices have.
  1 file changed, 1 insertion(+)
 
 diff --git a/libcontainer/specconv/spec_linux.go b/libcontainer/specconv/spec_linux.go
-index cba86c30..3d5179a3 100644
+index 4143cdc0..fed1552a 100644
 --- a/libcontainer/specconv/spec_linux.go
 +++ b/libcontainer/specconv/spec_linux.go
 @@ -334,6 +334,7 @@ var AllowedDevices = []*devices.Device{

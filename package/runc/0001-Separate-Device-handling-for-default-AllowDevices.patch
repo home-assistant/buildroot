@@ -1,31 +1,17 @@
-From 1b693e2ef1548df6e66639785812f235642ab715 Mon Sep 17 00:00:00 2001
+From 45d01bdfe25cccade969d5c9b6b57000246a79e5 Mon Sep 17 00:00:00 2001
 From: Stefan Agner <stefan@agner.ch>
 Date: Thu, 3 Mar 2022 14:24:37 +0100
-Subject: [PATCH 1/6] Separate Device handling for default AllowDevices
+Subject: [PATCH] Separate Device handling for default AllowDevices
 
 Signed-off-by: Stefan Agner <stefan@agner.ch>
 ---
- libcontainer/devices/device.go           |  3 +
- libcontainer/specconv/spec_linux.go      | 96 ++++++++++++++++--------
- libcontainer/specconv/spec_linux_test.go |  8 +-
+ libcontainer/specconv/spec_linux.go           | 96 ++++++++++++-------
+ libcontainer/specconv/spec_linux_test.go      |  8 +-
+ .../cgroups/devices/config/device.go          |  3 +
  3 files changed, 70 insertions(+), 37 deletions(-)
 
-diff --git a/libcontainer/devices/device.go b/libcontainer/devices/device.go
-index c2c2b3bb..9540a89c 100644
---- a/libcontainer/devices/device.go
-+++ b/libcontainer/devices/device.go
-@@ -24,6 +24,9 @@ type Device struct {
- 
- 	// Gid of the device.
- 	Gid uint32 `json:"gid"`
-+
-+	// Is Default Device
-+	IsDefault bool `json:"is_default"`
- }
- 
- // Permissions is a cgroupv1-style string to represent device access. It
 diff --git a/libcontainer/specconv/spec_linux.go b/libcontainer/specconv/spec_linux.go
-index 95ada499..c86d3400 100644
+index be1e3d8e..c6cd742d 100644
 --- a/libcontainer/specconv/spec_linux.go
 +++ b/libcontainer/specconv/spec_linux.go
 @@ -201,6 +201,7 @@ func KnownMountOptions() []string {
@@ -173,7 +159,7 @@ index 95ada499..c86d3400 100644
  	if err != nil {
  		return nil, err
  	}
-@@ -963,21 +975,22 @@ func stringToDeviceRune(s string) (devices.Type, error) {
+@@ -968,21 +980,22 @@ func stringToDeviceRune(s string) (devices.Type, error) {
  	}
  }
  
@@ -201,7 +187,7 @@ index 95ada499..c86d3400 100644
  		if ad.Path != "" {
  			config.Devices = append(config.Devices, ad)
  		}
-@@ -997,7 +1010,7 @@ next:
+@@ -1002,7 +1015,7 @@ next:
  			}
  			dt, err := stringToDeviceRune(d.Type)
  			if err != nil {
@@ -210,7 +196,7 @@ index 95ada499..c86d3400 100644
  			}
  			if d.FileMode != nil {
  				filemode = *d.FileMode &^ unix.S_IFMT
-@@ -1017,7 +1030,24 @@ next:
+@@ -1022,7 +1035,24 @@ next:
  		}
  	}
  
@@ -237,7 +223,7 @@ index 95ada499..c86d3400 100644
  
  func setupUserNamespace(spec *specs.Spec, config *configs.Config) error {
 diff --git a/libcontainer/specconv/spec_linux_test.go b/libcontainer/specconv/spec_linux_test.go
-index 8c7fb774..965ec4ff 100644
+index 66359f79..9aa3e4b9 100644
 --- a/libcontainer/specconv/spec_linux_test.go
 +++ b/libcontainer/specconv/spec_linux_test.go
 @@ -886,17 +886,17 @@ func TestCreateDevices(t *testing.T) {
@@ -262,3 +248,17 @@ index 8c7fb774..965ec4ff 100644
  			}
  			found = true
  		}
+diff --git a/vendor/github.com/opencontainers/cgroups/devices/config/device.go b/vendor/github.com/opencontainers/cgroups/devices/config/device.go
+index 05ad3ef8..e6b8a732 100644
+--- a/vendor/github.com/opencontainers/cgroups/devices/config/device.go
++++ b/vendor/github.com/opencontainers/cgroups/devices/config/device.go
+@@ -24,6 +24,9 @@ type Device struct {
+ 
+ 	// Gid of the device.
+ 	Gid uint32 `json:"gid"`
++
++	// Is Default Device
++	IsDefault bool `json:"is_default"`
+ }
+ 
+ // Permissions is a cgroupv1-style string to represent device access. It

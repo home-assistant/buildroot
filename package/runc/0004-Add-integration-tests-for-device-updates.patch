@@ -1,7 +1,7 @@
-From 18a44099acf8ddd13cc5f1bca1d4d52931c6e12c Mon Sep 17 00:00:00 2001
+From 73522d1429f4d648c779bcdb2fd51b5af7a25db2 Mon Sep 17 00:00:00 2001
 From: Stefan Agner <stefan@agner.ch>
 Date: Fri, 5 Aug 2022 13:03:21 +0200
-Subject: [PATCH 4/6] Add integration tests for device updates
+Subject: [PATCH] Add integration tests for device updates
 
 Signed-off-by: Stefan Agner <stefan@agner.ch>
 ---
@@ -9,7 +9,7 @@ Signed-off-by: Stefan Agner <stefan@agner.ch>
  1 file changed, 62 insertions(+)
 
 diff --git a/tests/integration/update.bats b/tests/integration/update.bats
-index 4d928c42..a5f9a5bb 100644
+index 034e959f..c9230051 100644
 --- a/tests/integration/update.bats
 +++ b/tests/integration/update.bats
 @@ -827,6 +827,68 @@ EOF

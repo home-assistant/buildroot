@@ -1,7 +1,7 @@
-From 29f032b3562d160c83bcaa678251150102e94d45 Mon Sep 17 00:00:00 2001
+From 1edd9733f991de6f6d41613816a4cc0961024af9 Mon Sep 17 00:00:00 2001
 From: Stefan Agner <stefan@agner.ch>
 Date: Thu, 3 Mar 2022 14:55:53 +0100
-Subject: [PATCH 2/6] Implement common function to create DeviceCgroup rules
+Subject: [PATCH] Implement common function to create DeviceCgroup rules
 
 Signed-off-by: Stefan Agner <stefan@agner.ch>
 ---
@@ -9,10 +9,10 @@ Signed-off-by: Stefan Agner <stefan@agner.ch>
  1 file changed, 49 insertions(+), 35 deletions(-)
 
 diff --git a/libcontainer/specconv/spec_linux.go b/libcontainer/specconv/spec_linux.go
-index c86d3400..8e025054 100644
+index c6cd742d..10b43fc2 100644
 --- a/libcontainer/specconv/spec_linux.go
 +++ b/libcontainer/specconv/spec_linux.go
-@@ -726,6 +726,48 @@ func initSystemdProps(spec *specs.Spec) ([]systemdDbus.Property, error) {
+@@ -731,6 +731,48 @@ func initSystemdProps(spec *specs.Spec) ([]systemdDbus.Property, error) {
  	return sp, nil
  }
  
@@ -58,10 +58,10 @@ index c86d3400..8e025054 100644
 +	return nil
 +}
 +
- func CreateCgroupConfig(opts *CreateOpts, defaultDevs []*devices.Device) (*configs.Cgroup, error) {
+ func CreateCgroupConfig(opts *CreateOpts, defaultDevs []*devices.Device) (*cgroups.Cgroup, error) {
  	var (
  		myCgroupPath string
-@@ -782,39 +824,10 @@ func CreateCgroupConfig(opts *CreateOpts, defaultDevs []*devices.Device) (*confi
+@@ -787,39 +829,10 @@ func CreateCgroupConfig(opts *CreateOpts, defaultDevs []*devices.Device) (*cgrou
  
  	// In rootless containers, any attempt to make cgroup changes is likely to fail.
  	// libcontainer will validate this but ignores the error.
@@ -103,7 +103,7 @@ index c86d3400..8e025054 100644
  			if r.Memory != nil {
  				if r.Memory.Limit != nil {
  					c.Resources.Memory = *r.Memory.Limit
-@@ -940,12 +953,13 @@ func CreateCgroupConfig(opts *CreateOpts, defaultDevs []*devices.Device) (*confi
+@@ -945,12 +958,13 @@ func CreateCgroupConfig(opts *CreateOpts, defaultDevs []*devices.Device) (*cgrou
  				}
  			}
  		}

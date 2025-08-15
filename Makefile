@@ -92,9 +92,9 @@ all:
 .PHONY: all
 
 # Set and export the version string
-export BR2_VERSION := 2025.02.4
+export BR2_VERSION := 2025.02.5
 # Actual time the release is cut (for reproducible builds)
-BR2_VERSION_EPOCH = 1750696300
+BR2_VERSION_EPOCH = 1754922100
 
 # Save running make version since it's clobbered by the make package
 RUNNING_MAKE_VERSION := $(MAKE_VERSION)
@@ -407,27 +407,28 @@ ifeq ($(BR2_HAVE_DOT_CONFIG),y)
 # Hide troublesome environment variables from sub processes
 #
 ################################################################################
-unexport CROSS_COMPILE
+unexport AR
 unexport ARCH
 unexport CC
-unexport LD
-unexport AR
-unexport CXX
-unexport CPP
-unexport RANLIB
 unexport CFLAGS
-unexport CXXFLAGS
-unexport GREP_OPTIONS
-unexport TAR_OPTIONS
 unexport CONFIG_SITE
-unexport QMAKESPEC
-unexport TERMINFO
+unexport CPP
+unexport CROSS_COMPILE
+unexport CXX
+unexport CXXFLAGS
+unexport DEVICE_TREE
+unexport GCC_COLORS
+unexport GREP_OPTIONS
+unexport LD
 unexport MACHINE
 unexport O
-unexport GCC_COLORS
-unexport PLATFORM
 unexport OS
-unexport DEVICE_TREE
+unexport PLATFORM
+unexport QMAKESPEC
+unexport RANLIB
+unexport TAR_OPTIONS
+unexport TERMINFO
+unexport TOPDIR
 
 GNU_HOST_NAME := $(shell support/gnuconfig/config.guess)
 

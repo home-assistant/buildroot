@@ -1,0 +1,60 @@
+From 4b601741af90aa7066fc344f57887bc3771c6379 Mon Sep 17 00:00:00 2001
+From: "J. Nick Koston" <nick@home-assistant.io>
+Date: Thu, 21 Aug 2025 15:45:38 -0500
+Subject: [PATCH] device: Fix device removal on le-connection-abort-by-local
+
+When a LE connection fails with le-connection-abort-by-local, temporary
+devices are incorrectly removed from D-Bus, preventing clients from
+retrying the connection.
+
+The issue occurs when:
+1. A connection attempt fails with ECONNABORTED (including the
+   le-connection-abort-by-local case)
+2. The device is added to the connect list for automatic retry
+3. The temporary timer (30s by default) is not restarted
+4. If the timer expires before the retry completes, the device is
+   removed from D-Bus
+5. Subsequent retry attempts fail with "device not found"
+
+This commonly happens with devices that abort connections during
+pairing or when incomplete GATT discovery triggers an abort.
+
+The fix restarts the temporary timer when ECONNABORTED occurs, ensuring
+the device remains available on D-Bus for the retry attempt. This
+matches the behavior when new connection attempts are initiated, where
+the timer is restarted to allow time for connection/pairing to complete.
+
+Reproducer logs show:
+- 14:19:37.374 - le-connection-abort-by-local, retry queued
+- 14:19:56.343 - Device removed from D-Bus (~19s later)
+- 14:19:56.606 - Retry fails: device not found on D-Bus
+
+With this fix, the device remains available for the retry, allowing
+the connection to succeed on subsequent attempts.
+
+Fixes: https://github.com/bluez/bluez/issues/1489
+Signed-off-by: J. Nick Koston <nick@koston.org>
+Signed-off-by: J. Nick Koston <nick@home-assistant.io>
+Upstream: https://lore.kernel.org/linux-bluetooth/20250821204538.26110-1-nick@home-assistant.io/
+---
+ src/device.c | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
+
+diff --git a/src/device.c b/src/device.c
+index 902c4aa..cb901c0 100644
+--- a/src/device.c
++++ b/src/device.c
+@@ -6233,8 +6233,12 @@ static void att_connect_cb(GIOChannel *io, GError *gerr, gpointer user_data)
+ 	if (gerr) {
+ 		DBG("%s", gerr->message);
+ 
+-		if (g_error_matches(gerr, BT_IO_ERROR, ECONNABORTED))
++		if (g_error_matches(gerr, BT_IO_ERROR, ECONNABORTED)) {
++			/* Restart temporary timer to prevent device removal */
++			if (device->temporary)
++				set_temporary_timer(device, btd_opts.tmpto);
+ 			goto done;
++		}
+ 
+ 		if (device_get_auto_connect(device)) {
+ 			DBG("Enabling automatic connections");

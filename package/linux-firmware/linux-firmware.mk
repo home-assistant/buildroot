@@ -4,7 +4,7 @@
 #
 ################################################################################
 
-LINUX_FIRMWARE_VERSION = 20250627
+LINUX_FIRMWARE_VERSION = 20251011
 LINUX_FIRMWARE_SOURCE = linux-firmware-$(LINUX_FIRMWARE_VERSION).tar.xz
 LINUX_FIRMWARE_SITE = $(BR2_KERNEL_MIRROR)/linux/kernel/firmware
 LINUX_FIRMWARE_INSTALL_IMAGES = YES
@@ -551,32 +551,32 @@ LINUX_FIRMWARE_ALL_LICENSE_FILES += LICENSE.QualcommAtheros_ath10k
 endif
 
 ifeq ($(BR2_PACKAGE_LINUX_FIRMWARE_IWLWIFI_100),y)
-LINUX_FIRMWARE_FILES += iwlwifi-100-*.ucode
+LINUX_FIRMWARE_FILES += intel/iwlwifi/iwlwifi-100-*.ucode
 LINUX_FIRMWARE_ALL_LICENSE_FILES += LICENCE.iwlwifi_firmware
 endif
 
 ifeq ($(BR2_PACKAGE_LINUX_FIRMWARE_IWLWIFI_105),y)
-LINUX_FIRMWARE_FILES += iwlwifi-105-*.ucode
+LINUX_FIRMWARE_FILES += intel/iwlwifi/iwlwifi-105-*.ucode
 LINUX_FIRMWARE_ALL_LICENSE_FILES += LICENCE.iwlwifi_firmware
 endif
 
 ifeq ($(BR2_PACKAGE_LINUX_FIRMWARE_IWLWIFI_135),y)
-LINUX_FIRMWARE_FILES += iwlwifi-135-*.ucode
+LINUX_FIRMWARE_FILES += intel/iwlwifi/iwlwifi-135-*.ucode
 LINUX_FIRMWARE_ALL_LICENSE_FILES += LICENCE.iwlwifi_firmware
 endif
 
 ifeq ($(BR2_PACKAGE_LINUX_FIRMWARE_IWLWIFI_1000),y)
-LINUX_FIRMWARE_FILES += iwlwifi-1000-*.ucode
+LINUX_FIRMWARE_FILES += intel/iwlwifi/iwlwifi-1000-*.ucode
 LINUX_FIRMWARE_ALL_LICENSE_FILES += LICENCE.iwlwifi_firmware
 endif
 
 ifeq ($(BR2_PACKAGE_LINUX_FIRMWARE_IWLWIFI_2000),y)
-LINUX_FIRMWARE_FILES += iwlwifi-2000-*.ucode
+LINUX_FIRMWARE_FILES += intel/iwlwifi/iwlwifi-2000-*.ucode
 LINUX_FIRMWARE_ALL_LICENSE_FILES += LICENCE.iwlwifi_firmware
 endif
 
 ifeq ($(BR2_PACKAGE_LINUX_FIRMWARE_IWLWIFI_2030),y)
-LINUX_FIRMWARE_FILES += iwlwifi-2030-*.ucode
+LINUX_FIRMWARE_FILES += intel/iwlwifi/iwlwifi-2030-*.ucode
 LINUX_FIRMWARE_ALL_LICENSE_FILES += LICENCE.iwlwifi_firmware
 endif
 
@@ -597,37 +597,37 @@ LINUX_FIRMWARE_IWL_BZ_UCODE_API_MAX = 92
 
 ifeq ($(BR2_PACKAGE_LINUX_FIRMWARE_IWLWIFI_22000),y)
 LINUX_FIRMWARE_FILES += \
-	iwlwifi-Qu-b0-hr-b0-$(LINUX_FIRMWARE_IWL_22000_UCODE_API_MAX).ucode \
-	iwlwifi-Qu-c0-hr-b0-$(LINUX_FIRMWARE_IWL_22000_UCODE_API_MAX).ucode \
-	iwlwifi-Qu-b0-jf-b0-$(LINUX_FIRMWARE_IWL_22000_UCODE_API_MAX).ucode \
-	iwlwifi-Qu-c0-jf-b0-$(LINUX_FIRMWARE_IWL_22000_UCODE_API_MAX).ucode \
-	iwlwifi-QuZ-a0-hr-b0-$(LINUX_FIRMWARE_IWL_22000_UCODE_API_MAX).ucode \
-	iwlwifi-QuZ-a0-jf-b0-$(LINUX_FIRMWARE_IWL_22000_UCODE_API_MAX).ucode
+	intel/iwlwifi/iwlwifi-Qu-b0-hr-b0-$(LINUX_FIRMWARE_IWL_22000_UCODE_API_MAX).ucode \
+	intel/iwlwifi/iwlwifi-Qu-c0-hr-b0-$(LINUX_FIRMWARE_IWL_22000_UCODE_API_MAX).ucode \
+	intel/iwlwifi/iwlwifi-Qu-b0-jf-b0-$(LINUX_FIRMWARE_IWL_22000_UCODE_API_MAX).ucode \
+	intel/iwlwifi/iwlwifi-Qu-c0-jf-b0-$(LINUX_FIRMWARE_IWL_22000_UCODE_API_MAX).ucode \
+	intel/iwlwifi/iwlwifi-QuZ-a0-hr-b0-$(LINUX_FIRMWARE_IWL_22000_UCODE_API_MAX).ucode \
+	intel/iwlwifi/iwlwifi-QuZ-a0-jf-b0-$(LINUX_FIRMWARE_IWL_22000_UCODE_API_MAX).ucode
 LINUX_FIRMWARE_ALL_LICENSE_FILES += LICENCE.iwlwifi_firmware
 endif
 
 ifeq ($(BR2_PACKAGE_LINUX_FIRMWARE_IWLWIFI_22260),y)
-LINUX_FIRMWARE_FILES += iwlwifi-cc-a0-$(LINUX_FIRMWARE_IWL_22000_UCODE_API_MAX).ucode
+LINUX_FIRMWARE_FILES += intel/iwlwifi/iwlwifi-cc-a0-$(LINUX_FIRMWARE_IWL_22000_UCODE_API_MAX).ucode
 LINUX_FIRMWARE_ALL_LICENSE_FILES += LICENCE.iwlwifi_firmware
 endif
 
 ifeq ($(BR2_PACKAGE_LINUX_FIRMWARE_IWLWIFI_3160),y)
-LINUX_FIRMWARE_FILES += iwlwifi-3160-*.ucode
+LINUX_FIRMWARE_FILES += intel/iwlwifi/iwlwifi-3160-*.ucode
 LINUX_FIRMWARE_ALL_LICENSE_FILES += LICENCE.iwlwifi_firmware
 endif
 
 ifeq ($(BR2_PACKAGE_LINUX_FIRMWARE_IWLWIFI_3168),y)
-LINUX_FIRMWARE_FILES += iwlwifi-3168-*.ucode
+LINUX_FIRMWARE_FILES += intel/iwlwifi/iwlwifi-3168-*.ucode
 LINUX_FIRMWARE_ALL_LICENSE_FILES += LICENCE.iwlwifi_firmware
 endif
 
 ifeq ($(BR2_PACKAGE_LINUX_FIRMWARE_IWLWIFI_3945),y)
-LINUX_FIRMWARE_FILES += iwlwifi-3945-2.ucode
+LINUX_FIRMWARE_FILES += intel/iwlwifi/iwlwifi-3945-2.ucode
 LINUX_FIRMWARE_ALL_LICENSE_FILES += LICENCE.iwlwifi_firmware
 endif
 
 ifeq ($(BR2_PACKAGE_LINUX_FIRMWARE_IWLWIFI_4965),y)
-LINUX_FIRMWARE_FILES += iwlwifi-4965-2.ucode
+LINUX_FIRMWARE_FILES += intel/iwlwifi/iwlwifi-4965-2.ucode
 LINUX_FIRMWARE_ALL_LICENSE_FILES += LICENCE.iwlwifi_firmware
 endif
 
@@ -636,49 +636,49 @@ endif
 # different versions of the firmware API. For now, we only install the
 # most recent one.
 ifeq ($(BR2_PACKAGE_LINUX_FIRMWARE_IWLWIFI_5000),y)
-LINUX_FIRMWARE_FILES += iwlwifi-5000-5.ucode
+LINUX_FIRMWARE_FILES += intel/iwlwifi/iwlwifi-5000-5.ucode
 LINUX_FIRMWARE_ALL_LICENSE_FILES += LICENCE.iwlwifi_firmware
 endif
 
 ifeq ($(BR2_PACKAGE_LINUX_FIRMWARE_IWLWIFI_6000G2A),y)
-LINUX_FIRMWARE_FILES += iwlwifi-6000g2a-6.ucode
+LINUX_FIRMWARE_FILES += intel/iwlwifi/iwlwifi-6000g2a-6.ucode
 LINUX_FIRMWARE_ALL_LICENSE_FILES += LICENCE.iwlwifi_firmware
 endif
 
 ifeq ($(BR2_PACKAGE_LINUX_FIRMWARE_IWLWIFI_6000G2B),y)
-LINUX_FIRMWARE_FILES += iwlwifi-6000g2b-6.ucode
+LINUX_FIRMWARE_FILES += intel/iwlwifi/iwlwifi-6000g2b-6.ucode
 LINUX_FIRMWARE_ALL_LICENSE_FILES += LICENCE.iwlwifi_firmware
 endif
 
 ifeq ($(BR2_PACKAGE_LINUX_FIRMWARE_IWLWIFI_7260),y)
-LINUX_FIRMWARE_FILES += iwlwifi-7260-*.ucode
+LINUX_FIRMWARE_FILES += intel/iwlwifi/iwlwifi-7260-*.ucode
 LINUX_FIRMWARE_ALL_LICENSE_FILES += LICENCE.iwlwifi_firmware
 endif
 
 ifeq ($(BR2_PACKAGE_LINUX_FIRMWARE_IWLWIFI_7265),y)
-LINUX_FIRMWARE_FILES += iwlwifi-7265-*.ucode
+LINUX_FIRMWARE_FILES += intel/iwlwifi/iwlwifi-7265-*.ucode
 LINUX_FIRMWARE_ALL_LICENSE_FILES += LICENCE.iwlwifi_firmware
 endif
 
 ifeq ($(BR2_PACKAGE_LINUX_FIRMWARE_IWLWIFI_7265D),y)
-LINUX_FIRMWARE_FILES += iwlwifi-7265D-*.ucode
+LINUX_FIRMWARE_FILES += intel/iwlwifi/iwlwifi-7265D-*.ucode
 LINUX_FIRMWARE_ALL_LICENSE_FILES += LICENCE.iwlwifi_firmware
 endif
 
 ifeq ($(BR2_PACKAGE_LINUX_FIRMWARE_IWLWIFI_8000C),y)
-LINUX_FIRMWARE_FILES += iwlwifi-8000C-$(LINUX_FIRMWARE_IWL8000_UCODE_API_MAX).ucode
+LINUX_FIRMWARE_FILES += intel/iwlwifi/iwlwifi-8000C-$(LINUX_FIRMWARE_IWL8000_UCODE_API_MAX).ucode
 LINUX_FIRMWARE_ALL_LICENSE_FILES += LICENCE.iwlwifi_firmware
 endif
 
 ifeq ($(BR2_PACKAGE_LINUX_FIRMWARE_IWLWIFI_8265),y)
-LINUX_FIRMWARE_FILES += iwlwifi-8265-$(LINUX_FIRMWARE_IWL8265_UCODE_API_MAX).ucode
+LINUX_FIRMWARE_FILES += intel/iwlwifi/iwlwifi-8265-$(LINUX_FIRMWARE_IWL8265_UCODE_API_MAX).ucode
 LINUX_FIRMWARE_ALL_LICENSE_FILES += LICENCE.iwlwifi_firmware
 endif
 
 ifeq ($(BR2_PACKAGE_LINUX_FIRMWARE_IWLWIFI_9XXX),y)
 LINUX_FIRMWARE_FILES += \
-	iwlwifi-9000-pu-b0-jf-b0-$(LINUX_FIRMWARE_IWL9000_UCODE_API_MAX).ucode \
-	iwlwifi-9260-th-b0-jf-b0-$(LINUX_FIRMWARE_IWL9000_UCODE_API_MAX).ucode
+	intel/iwlwifi/iwlwifi-9000-pu-b0-jf-b0-$(LINUX_FIRMWARE_IWL9000_UCODE_API_MAX).ucode \
+	intel/iwlwifi/iwlwifi-9260-th-b0-jf-b0-$(LINUX_FIRMWARE_IWL9000_UCODE_API_MAX).ucode
 LINUX_FIRMWARE_ALL_LICENSE_FILES += LICENCE.iwlwifi_firmware
 endif
 
@@ -687,31 +687,31 @@ endif
 # it only has firmware only up to version 77, like other in 22000.
 ifeq ($(BR2_PACKAGE_LINUX_FIRMWARE_IWLWIFI_6E),y)
 LINUX_FIRMWARE_FILES += \
-	iwlwifi-ma-b0-gf-a0-$(LINUX_FIRMWARE_IWL_AX210_UCODE_API_MAX).ucode \
-	iwlwifi-ma-b0-gf-a0.pnvm \
-	iwlwifi-so-a0-jf-b0-$(LINUX_FIRMWARE_IWL_AX210_UCODE_API_MAX_9560).ucode \
-	iwlwifi-so-a0-hr-b0-$(LINUX_FIRMWARE_IWL_AX210_UCODE_API_MAX).ucode \
-	iwlwifi-so-a0-gf-a0-$(LINUX_FIRMWARE_IWL_AX210_UCODE_API_MAX).ucode \
-	iwlwifi-so-a0-gf-a0.pnvm \
-	iwlwifi-ty-a0-gf-a0-$(LINUX_FIRMWARE_IWL_AX210_UCODE_API_MAX).ucode \
-	iwlwifi-ty-a0-gf-a0.pnvm
+	intel/iwlwifi/iwlwifi-ma-b0-gf-a0-$(LINUX_FIRMWARE_IWL_AX210_UCODE_API_MAX).ucode \
+	intel/iwlwifi/iwlwifi-ma-b0-gf-a0.pnvm \
+	intel/iwlwifi/iwlwifi-so-a0-jf-b0-$(LINUX_FIRMWARE_IWL_AX210_UCODE_API_MAX_9560).ucode \
+	intel/iwlwifi/iwlwifi-so-a0-hr-b0-$(LINUX_FIRMWARE_IWL_AX210_UCODE_API_MAX).ucode \
+	intel/iwlwifi/iwlwifi-so-a0-gf-a0-$(LINUX_FIRMWARE_IWL_AX210_UCODE_API_MAX).ucode \
+	intel/iwlwifi/iwlwifi-so-a0-gf-a0.pnvm \
+	intel/iwlwifi/iwlwifi-ty-a0-gf-a0-$(LINUX_FIRMWARE_IWL_AX210_UCODE_API_MAX).ucode \
+	intel/iwlwifi/iwlwifi-ty-a0-gf-a0.pnvm
 LINUX_FIRMWARE_ALL_LICENSE_FILES += LICENCE.iwlwifi_firmware
 endif
 
 ifeq ($(BR2_PACKAGE_LINUX_FIRMWARE_IWLWIFI_7),y)
-LINUX_FIRMWARE_FILES += iwlwifi-gl-c0-fm-c0*.{ucode,pnvm}
+LINUX_FIRMWARE_FILES += intel/iwlwifi/iwlwifi-gl-c0-fm-c0*.{ucode,pnvm}
 LINUX_FIRMWARE_ALL_LICENSE_FILES += LICENCE.iwlwifi_firmware
 endif
 
 ifeq ($(BR2_PACKAGE_LINUX_FIRMWARE_IWLWIFI_QUZ),y)
-LINUX_FIRMWARE_FILES += iwlwifi-QuZ-*.ucode
+LINUX_FIRMWARE_FILES += intel/iwlwifi/iwlwifi-QuZ-*.ucode
 LINUX_FIRMWARE_ALL_LICENSE_FILES += LICENCE.iwlwifi_firmware
 endif
 
 ifeq ($(BR2_PACKAGE_LINUX_FIRMWARE_IWLWIFI_GL),y)
 LINUX_FIRMWARE_FILES += \
-	iwlwifi-gl-c0-fm-c0-$(LINUX_FIRMWARE_IWL_BZ_UCODE_API_MAX).ucode\
-	iwlwifi-gl-c0-fm-c0.pnvm
+	intel/iwlwifi/iwlwifi-gl-c0-fm-c0-$(LINUX_FIRMWARE_IWL_BZ_UCODE_API_MAX).ucode\
+	intel/iwlwifi/iwlwifi-gl-c0-fm-c0.pnvm
 LINUX_FIRMWARE_ALL_LICENSE_FILES += LICENCE.iwlwifi_firmware
 endif
 
@@ -970,17 +970,17 @@ LINUX_FIRMWARE_FILES += \
 endif
 
 ifeq ($(BR2_PACKAGE_LINUX_FIRMWARE_QAT_DH895XCC),y)
-LINUX_FIRMWARE_FILES += qat_895xcc.bin qat_895xcc_mmp.bin
+LINUX_FIRMWARE_FILES += intel/qat/qat_895xcc.bin intel/qat/qat_895xcc_mmp.bin
 LINUX_FIRMWARE_ALL_LICENSE_FILES += LICENCE.qat_firmware
 endif
 
 ifeq ($(BR2_PACKAGE_LINUX_FIRMWARE_QAT_C3XXX),y)
-LINUX_FIRMWARE_FILES += qat_c3xxx.bin qat_c3xxx_mmp.bin
+LINUX_FIRMWARE_FILES += intel/qat/qat_c3xxx.bin intel/qat/qat_c3xxx_mmp.bin
 LINUX_FIRMWARE_ALL_LICENSE_FILES += LICENCE.qat_firmware
 endif
 
 ifeq ($(BR2_PACKAGE_LINUX_FIRMWARE_QAT_C62X),y)
-LINUX_FIRMWARE_FILES += qat_c62x.bin qat_c62x_mmp.bin
+LINUX_FIRMWARE_FILES += intel/qat/qat_c62x.bin intel/qat/qat_c62x_mmp.bin
 LINUX_FIRMWARE_ALL_LICENSE_FILES += LICENCE.qat_firmware
 endif
 

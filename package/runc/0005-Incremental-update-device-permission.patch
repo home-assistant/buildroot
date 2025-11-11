@@ -1,4 +1,4 @@
-From 26228b96ba1fcd72f6a0a474f296a962411c7d61 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Stefan Agner <stefan@agner.ch>
 Date: Mon, 8 Aug 2022 13:39:26 +0200
 Subject: [PATCH] Incremental update device permission
@@ -8,10 +8,10 @@ Subject: [PATCH] Incremental update device permission
  1 file changed, 1 insertion(+), 4 deletions(-)
 
 diff --git a/update.go b/update.go
-index c12dc713..fee7d25e 100644
+index 4f22064a..117c1ae8 100644
 --- a/update.go
 +++ b/update.go
-@@ -342,10 +342,7 @@ other options are ignored.
+@@ -362,10 +362,7 @@ other options are ignored.
  		config.Cgroups.Resources.Unified = r.Unified
  
  		if len(r.Devices) > 0 {

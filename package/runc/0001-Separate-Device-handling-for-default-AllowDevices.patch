@@ -1,4 +1,4 @@
-From 45d01bdfe25cccade969d5c9b6b57000246a79e5 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Stefan Agner <stefan@agner.ch>
 Date: Thu, 3 Mar 2022 14:24:37 +0100
 Subject: [PATCH] Separate Device handling for default AllowDevices
@@ -249,13 +249,13 @@ index 66359f79..9aa3e4b9 100644
  			found = true
  		}
 diff --git a/vendor/github.com/opencontainers/cgroups/devices/config/device.go b/vendor/github.com/opencontainers/cgroups/devices/config/device.go
-index 05ad3ef8..e6b8a732 100644
+index 295575cb..90a24c96 100644
 --- a/vendor/github.com/opencontainers/cgroups/devices/config/device.go
 +++ b/vendor/github.com/opencontainers/cgroups/devices/config/device.go
 @@ -24,6 +24,9 @@ type Device struct {
  
  	// Gid of the device.
- 	Gid uint32 `json:"gid"`
+ 	Gid uint32 `json:"gid,omitempty"` //nolint:revive // Suppress "var-naming: struct field Gid should be GID".
 +
 +	// Is Default Device
 +	IsDefault bool `json:"is_default"`

@@ -5,11 +5,15 @@
 ################################################################################
 
 HAPROXY_VERSION_MAJOR = 2.6
-HAPROXY_VERSION = $(HAPROXY_VERSION_MAJOR).22
+HAPROXY_VERSION = $(HAPROXY_VERSION_MAJOR).23
 HAPROXY_SITE = http://www.haproxy.org/download/$(HAPROXY_VERSION_MAJOR)/src
 HAPROXY_LICENSE = GPL-2.0+ and LGPL-2.1+ with exceptions
 HAPROXY_LICENSE_FILES = LICENSE doc/lgpl.txt doc/gpl.txt
 HAPROXY_CPE_ID_VENDOR = haproxy
+
+# Incomplete NVD annotations, fixed since v2.6.15
+# https://git.haproxy.org/?p=haproxy-2.6.git;a=commit;h=832b672eee54866c7a42a1d46078cc9ae0d544d9
+HAPROXY_IGNORE_CVES += CVE-2023-45539
 
 HAPROXY_MAKE_OPTS = \
 	LD=$(TARGET_CC) \

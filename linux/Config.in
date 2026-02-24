@@ -137,7 +137,7 @@ config BR2_LINUX_KERNEL_CUSTOM_REPO_GIT_SUBMODULES
 
 config BR2_LINUX_KERNEL_VERSION
 	string
-	default "6.12.65" if BR2_LINUX_KERNEL_LATEST_VERSION
+	default "6.12.73" if BR2_LINUX_KERNEL_LATEST_VERSION
 	default "5.10.246-cip66" if BR2_LINUX_KERNEL_LATEST_CIP_VERSION
 	default "5.10.246-cip66-rt29" if BR2_LINUX_KERNEL_LATEST_CIP_RT_VERSION
 	default BR2_LINUX_KERNEL_CUSTOM_VERSION_VALUE \
@@ -145,6 +145,14 @@ config BR2_LINUX_KERNEL_VERSION
 	default "custom" if BR2_LINUX_KERNEL_CUSTOM_TARBALL
 	default BR2_LINUX_KERNEL_CUSTOM_REPO_VERSION \
 		if BR2_LINUX_KERNEL_CUSTOM_GIT || BR2_LINUX_KERNEL_CUSTOM_HG || BR2_LINUX_KERNEL_CUSTOM_SVN
+
+config BR2_LINUX_KERNEL_LICENSE_FILES
+	string "Kernel license files" if BR2_LINUX_KERNEL_CUSTOM_GIT || BR2_LINUX_KERNEL_CUSTOM_HG || \
+		BR2_LINUX_KERNEL_CUSTOM_SVN || BR2_LINUX_KERNEL_CUSTOM_TARBALL
+	default "COPYING LICENSES/preferred/GPL-2.0 LICENSES/exceptions/Linux-syscall-note"
+	help
+	  A space-separated list of license files related to the Linux
+	  kernel package.
 
 #
 # Patch selection
@@ -461,7 +469,7 @@ config BR2_LINUX_KERNEL_CUSTOM_DTS_DIR
 	  match the vendor subdirectory used by the board in the kernel
 	  (e.g. arch/arm64/boot/dts/rockchip/).
 
-	  While most architechtures make use of vendor subdirectories,
+	  While most architectures make use of vendor subdirectories,
 	  like arm, arm64 and riscv, some architectures like powerpc
 	  and xtensa do not.
 	  In this case, BR2_LINUX_KERNEL_CUSTOM_DTS_DIR should point to

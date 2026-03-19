@@ -11,11 +11,23 @@ GRAPHICSMAGICK_LICENSE = MIT
 GRAPHICSMAGICK_LICENSE_FILES = Copyright.txt
 GRAPHICSMAGICK_CPE_ID_VENDOR = graphicsmagick
 
+# Wrong NVD annotations
+# Fixed in version 1.2.3
+GRAPHICSMAGICK_IGNORE_CVES += CVE-2008-6621
+
+# Wrong NVD annotations englobbing all versions
+# Wrong patch for CVE-2006-5456 later updated
+# https://bugzilla.redhat.com/show_bug.cgi?id=210921#c5
+GRAPHICSMAGICK_IGNORE_CVES += CVE-2007-0770
+
 # 0001-ReadJXLImage-Apply-image-dimension-resource-limits.patch
 GRAPHICSMAGICK_IGNORE_CVES += CVE-2025-27795
 
 # 0002-ReadJXLImage-pixel_format-num_channels-needs-to-be.patch
 GRAPHICSMAGICK_IGNORE_CVES += CVE-2025-32460
+
+# 0003-Assure-that-palette-buffer-is-allocated-and-the-current-size.patch
+GRAPHICSMAGICK_IGNORE_CVES += CVE-2025-27796
 
 GRAPHICSMAGICK_INSTALL_STAGING = YES
 GRAPHICSMAGICK_CONFIG_SCRIPTS = GraphicsMagick-config GraphicsMagickWand-config

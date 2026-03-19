@@ -4,14 +4,66 @@
 #
 ################################################################################
 
-# Latest, and probably last, commit on the stable-2.0 branch
-FREERDP_VERSION = 2.11.7-18-g0ee17e2f8e49d56ab5b90d5160fa8f87ffc445e0
+# Latest, and probably last, release on the stable-2.0 branch
+FREERDP_VERSION = 2.11.8
 FREERDP_SITE = https://github.com/FreeRDP/FreeRDP
 FREERDP_SITE_METHOD = git
 FREERDP_DEPENDENCIES = libglib2 openssl zlib
 FREERDP_LICENSE = Apache-2.0
 FREERDP_LICENSE_FILES = LICENSE
 FREERDP_CPE_ID_VENDOR = freerdp
+
+# Introduced in v3.0.0-beta1
+# https://security-tracker.debian.org/tracker/CVE-2024-32662
+FREERDP_IGNORE_CVES += CVE-2024-32662
+
+# Windows only
+# https://security-tracker.debian.org/tracker/CVE-2025-68118
+FREERDP_IGNORE_CVES += CVE-2025-68118
+
+# 0009-fix-missing-check-in-rdp-write-logon-info-v1.patch
+FREERDP_IGNORE_CVES += CVE-2024-32661
+
+# 0010-fix-decoder-length-checks.patch
+FREERDP_IGNORE_CVES += CVE-2026-23530
+
+# 0011-fix-missing-length-checks.patch
+# 0012-check-clear-decomress-glyphData.patch
+FREERDP_IGNORE_CVES += CVE-2026-23531
+
+# 0013-properly-clamp-SurfaceToSurface.patch
+FREERDP_IGNORE_CVES += CVE-2026-23532
+
+# 0014-fix-clear-resize-buffer-checks.patch
+FREERDP_IGNORE_CVES += CVE-2026-23533
+
+# 0015-fix-off-by-one-length-check.patch
+FREERDP_IGNORE_CVES += CVE-2026-23534
+
+# 0016-fix-missing-NULL-check.patch
+FREERDP_IGNORE_CVES += CVE-2026-23948
+
+# 0017-do-not-free-MsConfig-on-failure.patch
+FREERDP_IGNORE_CVES += CVE-2026-24675
+
+# 0018-reset-audin-format.patch
+FREERDP_IGNORE_CVES += CVE-2026-24676
+
+# 0019-ensure-InterfaceNumber-is-within-range.patch
+FREERDP_IGNORE_CVES += CVE-2026-24679
+
+# 0020-cancel-all-usb-transfers-on-channel-close.patch
+FREERDP_IGNORE_CVES += CVE-2026-24681
+
+# 0021-fix-audin-server-recv-formats-cleanup.patch
+FREERDP_IGNORE_CVES += CVE-2026-24682
+
+# 0022-lock-context-when-updating-listener.patch
+FREERDP_IGNORE_CVES += CVE-2026-24683
+
+# 0023-terminate-thread-before-free.patch
+# 0024-only-clean-up-thread-before-free.patch
+FREERDP_IGNORE_CVES += CVE-2026-24684
 
 FREERDP_INSTALL_STAGING = YES
 

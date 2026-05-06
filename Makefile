@@ -92,9 +92,9 @@ all:
 .PHONY: all
 
 # Set and export the version string
-export BR2_VERSION := 2025.02.12
+export BR2_VERSION := 2025.02.13
 # Actual time the release is cut (for reproducible builds)
-BR2_VERSION_EPOCH = 1773776700
+BR2_VERSION_EPOCH = 1776805100
 
 # Save running make version since it's clobbered by the make package
 RUNNING_MAKE_VERSION := $(MAKE_VERSION)
@@ -250,6 +250,13 @@ export TZ = UTC
 export LANG = C
 export LC_ALL = C
 endif
+
+# we set a default value here to avoid a Kconfig warning about unset
+# environment varilable. This option is passed as an environment
+# variable to be controlled by autobuilders. The purpose is to test
+# less frequently some uncommon configurations which tend to generate
+# more build failures.
+export BR2_HIDE_SECONDARY_TARGET_OPTIONS ?= n
 
 # To put more focus on warnings, be less verbose as default
 # Use 'make V=1' to see the full commands

@@ -14,6 +14,8 @@ STRONGSWAN_DEPENDENCIES = host-pkgconf
 STRONGSWAN_INSTALL_STAGING = YES
 # 0001-eap_mschapv2_failure_request_len.patch
 STRONGSWAN_IGNORE_CVES += CVE-2025-62291
+# 0002-fix-cve-2026-25075.patch
+STRONGSWAN_IGNORE_CVES += CVE-2026-25075
 STRONGSWAN_CONF_OPTS += \
 	--without-lib-prefix \
 	--enable-led \
@@ -83,11 +85,6 @@ ifeq ($(BR2_PACKAGE_STRONGSWAN_SQL),y)
 STRONGSWAN_DEPENDENCIES += \
 	$(if $(BR2_PACKAGE_SQLITE),sqlite) \
 	$(if $(BR2_PACKAGE_MARIADB),mariadb)
-endif
-
-# https://github.com/strongswan/strongswan/issues/2410
-ifeq ($(BR2_PACKAGE_STRONGSWAN_WOLFSSL),y)
-STRONGSWAN_CONF_ENV += CPPFLAGS="$(TARGET_CPPFLAGS) -DWC_NO_RNG"
 endif
 
 # disable connmark/forecast until net/if.h vs. linux/if.h conflict resolved

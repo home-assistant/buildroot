@@ -4,7 +4,7 @@
 #
 ################################################################################
 
-LOG4CXX_VERSION = 1.3.1
+LOG4CXX_VERSION = 1.7.0
 LOG4CXX_SITE = https://archive.apache.org/dist/logging/log4cxx/$(LOG4CXX_VERSION)
 LOG4CXX_SOURCE = apache-log4cxx-$(LOG4CXX_VERSION).tar.gz
 LOG4CXX_INSTALL_STAGING = YES
@@ -23,10 +23,10 @@ LOG4CXX_DEPENDENCIES += boost
 endif
 
 ifeq ($(BR2_PACKAGE_LIBESMTP),y)
-LOG4CXX_CONF_OPTS += -DLOG4CXX_ENABLE_LIBESMTP=ON
+LOG4CXX_CONF_OPTS += -DLOG4CXX_ENABLE_ESMTP=ON
 LOG4CXX_DEPENDENCIES += libesmtp
 else
-LOG4CXX_CONF_OPTS += -DLOG4CXX_ENABLE_LIBESMTP=OFF
+LOG4CXX_CONF_OPTS += -DLOG4CXX_ENABLE_ESMTP=OFF
 endif
 
 ifeq ($(BR2_PACKAGE_UNIXODBC),y)

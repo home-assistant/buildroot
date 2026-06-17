@@ -13,8 +13,12 @@ PYTHON3_LICENSE_FILES = LICENSE
 PYTHON3_CPE_ID_VENDOR = python
 PYTHON3_CPE_ID_PRODUCT = python
 
-# 0013-tarfile-now-validates-archives-to-ensure-member-offsets-are-non-negative.patch
-PYTHON3_IGNORE_CVES += CVE-2025-8194
+# 0013-Fix-O-n-2-canonical-ordering-in-unicodedata-normalize.patch
+PYTHON3_IGNORE_CVES += CVE-2026-3276
+# 0014-tarfile-data_filter-validate-written-link.patch
+PYTHON3_IGNORE_CVES += CVE-2026-7774
+# 0015-Apply-CVE-2021-4189-PASV-fix-to-ftplib-ftpcp.patch
+PYTHON3_IGNORE_CVES += CVE-2026-8328
 
 # This host Python is installed in $(HOST_DIR), as it is needed when
 # cross-compiling third-party Python modules.

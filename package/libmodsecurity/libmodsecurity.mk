@@ -4,7 +4,7 @@
 #
 ################################################################################
 
-LIBMODSECURITY_VERSION = 3.0.14
+LIBMODSECURITY_VERSION = 3.0.15
 LIBMODSECURITY_SOURCE = modsecurity-v$(LIBMODSECURITY_VERSION).tar.gz
 LIBMODSECURITY_SITE = https://github.com/owasp-modsecurity/ModSecurity/releases/download/v$(LIBMODSECURITY_VERSION)
 LIBMODSECURITY_INSTALL_STAGING = YES
@@ -13,7 +13,7 @@ LIBMODSECURITY_LICENSE_FILES = LICENSE
 LIBMODSECURITY_CPE_ID_VENDOR = trustwave
 LIBMODSECURITY_CPE_ID_PRODUCT = modsecurity
 
-LIBMODSECURITY_DEPENDENCIES = pcre2
+LIBMODSECURITY_DEPENDENCIES = pcre2 host-pkgconf
 LIBMODSECURITY_CONF_OPTS = \
 	--without-pcre \
 	--with-pcre2="$(STAGING_DIR)/usr" \

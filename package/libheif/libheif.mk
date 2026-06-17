@@ -4,14 +4,13 @@
 #
 ################################################################################
 
-LIBHEIF_VERSION = 1.20.1
+LIBHEIF_VERSION = 1.23.0
 LIBHEIF_SITE = https://github.com/strukturag/libheif/releases/download/v$(LIBHEIF_VERSION)
 LIBHEIF_LICENSE = LGPL-3.0+
 LIBHEIF_LICENSE_FILES = COPYING
 LIBHEIF_CPE_ID_VENDOR = struktur
 LIBHEIF_INSTALL_STAGING = YES
 LIBHEIF_CONF_OPTS = \
-	-DCMAKE_CXX_FLAGS="-std=c++11" \
 	-DENABLE_PLUGIN_LOADING=OFF \
 	-DWITH_AOM_DECODER=OFF \
 	-DWITH_AOM_ENCODER=OFF \
@@ -22,9 +21,6 @@ LIBHEIF_CONF_OPTS = \
 	-DWITH_RAV1E=OFF \
 	-DWITH_REDUCED_VISIBILITY=ON \
 	-DWITH_SvtEnc=OFF
-
-# 0001-fix-wrong-copy-width-in-overlay-images.patch
-LIBHEIF_IGNORE_CVES += CVE-2025-68431
 
 ifeq ($(BR2_PACKAGE_DAV1D),y)
 LIBHEIF_CONF_OPTS += -DWITH_DAV1D=ON

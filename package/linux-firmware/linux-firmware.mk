@@ -726,6 +726,13 @@ LINUX_FIRMWARE_FILES += intel/iwlwifi/iwlwifi-gl-c0-fm-c0*.{ucode,pnvm}
 LINUX_FIRMWARE_ALL_LICENSE_FILES += LICENCE.iwlwifi_firmware
 endif
 
+ifeq ($(BR2_PACKAGE_LINUX_FIRMWARE_IWLWIFI_BZ),y)
+LINUX_FIRMWARE_FILES += \
+	intel/iwlwifi/iwlwifi-bz-b0-fm-c0-$(LINUX_FIRMWARE_IWL_BZ_UCODE_API_MAX).ucode \
+	intel/iwlwifi/iwlwifi-bz-b0-fm-c0.pnvm
+LINUX_FIRMWARE_ALL_LICENSE_FILES += LICENCE.iwlwifi_firmware
+endif
+
 ifeq ($(BR2_PACKAGE_LINUX_FIRMWARE_IWLWIFI_QUZ),y)
 LINUX_FIRMWARE_FILES += intel/iwlwifi/iwlwifi-QuZ-*.ucode
 LINUX_FIRMWARE_ALL_LICENSE_FILES += LICENCE.iwlwifi_firmware

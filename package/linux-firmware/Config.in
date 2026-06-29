@@ -377,6 +377,12 @@ config BR2_PACKAGE_LINUX_FIRMWARE_IWLWIFI_7
 	  Firmware files for the Intel Wi-Fi 7 (BE20x) devices
 	  supported by the iwlwifi kernel driver.
 
+config BR2_PACKAGE_LINUX_FIRMWARE_IWLWIFI_BZ
+	bool "Intel iwlwifi BZ"
+	help
+	  Firmware files for the Intel Wi-Fi 7 devices of the BZ
+	  family (e.g. BE201) supported by the iwlwifi kernel driver.
+
 config BR2_PACKAGE_LINUX_FIRMWARE_IWLWIFI_QUZ
 	bool "Intel iwlwifi QuZ"
 	help

@@ -1,4 +1,4 @@
-From 87932aa3d01294886b71f9566f3bf881cf769c66 Mon Sep 17 00:00:00 2001
+From a5c4e1fb52ac2e7a23a288833b87aa6463302627 Mon Sep 17 00:00:00 2001
 From: Curd Becker <me@curd-becker.de>
 Date: Mon, 17 Nov 2025 00:28:05 +0100
 Subject: [PATCH] Replace os.Is* error checking functions with their errors.Is
@@ -35,6 +35,9 @@ Conflicts:
   libcontainer/container_linux.go
   libcontainer/intelrdt/intelrdt.go
 Signed-off-by: Romain Naour <romain.naour@smile.fr>
+[Stefan: rebase on 1.3.6, drop the libcontainer/rootfs_linux.go hunks
+ already applied upstream via the pathrs rewrite]
+Signed-off-by: Stefan Agner <stefan.agner@openhomefoundation.org>
 ---
  libcontainer/configs/validate/validator.go      |  6 +++---
  libcontainer/configs/validate/validator_test.go |  7 ++++---
@@ -45,14 +48,14 @@ Signed-off-by: Romain Naour <romain.naour@smile.fr>
  libcontainer/integration/exec_test.go           |  6 +++---
  libcontainer/notify_linux.go                    |  2 +-
  libcontainer/process_linux.go                   |  2 +-
- libcontainer/rootfs_linux.go                    |  8 ++++----
+ libcontainer/rootfs_linux.go                    |  2 +-
  libcontainer/specconv/spec_linux_test.go        |  5 +++--
  libcontainer/state_linux.go                     |  3 ++-
  spec.go                                         |  4 ++--
- 13 files changed, 33 insertions(+), 30 deletions(-)
+ 13 files changed, 30 insertions(+), 27 deletions(-)
 
 diff --git a/libcontainer/configs/validate/validator.go b/libcontainer/configs/validate/validator.go
-index e0052900..3b77617b 100644
+index e005290..3b77617 100644
 --- a/libcontainer/configs/validate/validator.go
 +++ b/libcontainer/configs/validate/validator.go
 @@ -104,7 +104,7 @@ func security(config *configs.Config) error {
@@ -81,7 +84,7 @@ index e0052900..3b77617b 100644
  		}
  		hasPath := config.Namespaces.PathOf(configs.NEWTIME) != ""
 diff --git a/libcontainer/configs/validate/validator_test.go b/libcontainer/configs/validate/validator_test.go
-index d157feea..41412ba4 100644
+index d157fee..41412ba 100644
 --- a/libcontainer/configs/validate/validator_test.go
 +++ b/libcontainer/configs/validate/validator_test.go
 @@ -1,6 +1,7 @@
@@ -120,10 +123,10 @@ index d157feea..41412ba4 100644
  	}
  	config := &configs.Config{
 diff --git a/libcontainer/criu_linux.go b/libcontainer/criu_linux.go
-index 53a0202a..ddf95445 100644
+index d0f9742..1186060 100644
 --- a/libcontainer/criu_linux.go
 +++ b/libcontainer/criu_linux.go
-@@ -123,7 +123,7 @@ func (c *Container) addMaskPaths(req *criurpc.CriuReq) error {
+@@ -124,7 +124,7 @@ func (c *Container) addMaskPaths(req *criurpc.CriuReq) error {
  	for _, path := range c.config.MaskPaths {
  		fi, err := os.Stat(fmt.Sprintf("/proc/%d/root/%s", c.initProcess.pid(), path))
  		if err != nil {
@@ -132,7 +135,7 @@ index 53a0202a..ddf95445 100644
  				continue
  			}
  			return err
-@@ -304,7 +304,7 @@ func (c *Container) Checkpoint(criuOpts *CriuOpts) error {
+@@ -305,7 +305,7 @@ func (c *Container) Checkpoint(criuOpts *CriuOpts) error {
  
  	// Since a container can be C/R'ed multiple times,
  	// the checkpoint directory may already exist.
@@ -141,7 +144,7 @@ index 53a0202a..ddf95445 100644
  		return err
  	}
  
-@@ -339,7 +339,7 @@ func (c *Container) Checkpoint(criuOpts *CriuOpts) error {
+@@ -340,7 +340,7 @@ func (c *Container) Checkpoint(criuOpts *CriuOpts) error {
  
  	// if criuOpts.WorkDirectory is not set, criu default is used.
  	if criuOpts.WorkDirectory != "" {
@@ -150,7 +153,7 @@ index 53a0202a..ddf95445 100644
  			return err
  		}
  		workDir, err := os.Open(criuOpts.WorkDirectory)
-@@ -698,7 +698,7 @@ func (c *Container) Restore(process *Process, criuOpts *CriuOpts) error {
+@@ -711,7 +711,7 @@ func (c *Container) Restore(process *Process, criuOpts *CriuOpts) error {
  	if criuOpts.WorkDirectory != "" {
  		// Since a container can be C/R'ed multiple times,
  		// the work directory may already exist.
@@ -159,7 +162,7 @@ index 53a0202a..ddf95445 100644
  			return err
  		}
  		workDir, err := os.Open(criuOpts.WorkDirectory)
-@@ -1149,7 +1149,7 @@ func (c *Container) criuNotifications(resp *criurpc.CriuResp, process *Process,
+@@ -1162,7 +1162,7 @@ func (c *Container) criuNotifications(resp *criurpc.CriuResp, process *Process,
  			return err
  		}
  		if err := os.Remove(filepath.Join(c.stateDir, "checkpoint")); err != nil {
@@ -169,7 +172,7 @@ index 53a0202a..ddf95445 100644
  			}
  		}
 diff --git a/libcontainer/devices/device_unix.go b/libcontainer/devices/device_unix.go
-index c533eb1c..409e58e9 100644
+index c533eb1..409e58e 100644
 --- a/libcontainer/devices/device_unix.go
 +++ b/libcontainer/devices/device_unix.go
 @@ -98,7 +98,7 @@ func GetDevices(path string) ([]*Device, error) {
@@ -182,7 +185,7 @@ index c533eb1c..409e58e9 100644
  			}
  			return nil, err
 diff --git a/libcontainer/factory_linux.go b/libcontainer/factory_linux.go
-index 94b55eaa..d8a2d8e3 100644
+index bc3349a..41df4df 100644
 --- a/libcontainer/factory_linux.go
 +++ b/libcontainer/factory_linux.go
 @@ -51,7 +51,7 @@ func Create(root, id string, config *configs.Config) (*Container, error) {
@@ -204,7 +207,7 @@ index 94b55eaa..d8a2d8e3 100644
  		}
  		return nil, err
 diff --git a/libcontainer/init_linux.go b/libcontainer/init_linux.go
-index 40529200..25c135f3 100644
+index 4052920..25c135f 100644
 --- a/libcontainer/init_linux.go
 +++ b/libcontainer/init_linux.go
 @@ -311,7 +311,7 @@ func finalizeNamespace(config *initConfig) error {
@@ -226,7 +229,7 @@ index 40529200..25c135f3 100644
  	}
  
 diff --git a/libcontainer/integration/exec_test.go b/libcontainer/integration/exec_test.go
-index df99da26..14006922 100644
+index df99da2..1400692 100644
 --- a/libcontainer/integration/exec_test.go
 +++ b/libcontainer/integration/exec_test.go
 @@ -1097,7 +1097,7 @@ func TestHook(t *testing.T) {
@@ -257,7 +260,7 @@ index df99da26..14006922 100644
  	}
  	if testing.Short() {
 diff --git a/libcontainer/notify_linux.go b/libcontainer/notify_linux.go
-index a8762842..77e23157 100644
+index a876284..77e2315 100644
 --- a/libcontainer/notify_linux.go
 +++ b/libcontainer/notify_linux.go
 @@ -51,7 +51,7 @@ func registerMemoryEvent(cgDir string, evName string, arg string) (<-chan struct
@@ -270,7 +273,7 @@ index a8762842..77e23157 100644
  			}
  			ch <- struct{}{}
 diff --git a/libcontainer/process_linux.go b/libcontainer/process_linux.go
-index baf3706c..6f10a6c2 100644
+index baf3706..6f10a6c 100644
 --- a/libcontainer/process_linux.go
 +++ b/libcontainer/process_linux.go
 @@ -940,7 +940,7 @@ func getPipeFds(pid int) ([]string, error) {
@@ -283,19 +286,10 @@ index baf3706c..6f10a6c2 100644
  			}
  			return fds, err
 diff --git a/libcontainer/rootfs_linux.go b/libcontainer/rootfs_linux.go
-index 31d05174..abc372f3 100644
+index 4b76f3e..1111089 100644
 --- a/libcontainer/rootfs_linux.go
 +++ b/libcontainer/rootfs_linux.go
-@@ -361,7 +361,7 @@ func mountCgroupV1(m mountEntry, c *mountConfig) error {
- 			// symlink(2) is very dumb, it will just shove the path into
- 			// the link and doesn't do any checks or relative path
- 			// conversion. Also, don't error out if the cgroup already exists.
--			if err := os.Symlink(mc, filepath.Join(c.root, m.Destination, ss)); err != nil && !os.IsExist(err) {
-+			if err := os.Symlink(mc, filepath.Join(c.root, m.Destination, ss)); err != nil && !errors.Is(err, os.ErrExist) {
- 				return err
- 			}
- 		}
-@@ -613,7 +613,7 @@ func mountToRootfs(c *mountConfig, m mountEntry) error {
+@@ -625,7 +625,7 @@ func mountToRootfs(c *mountConfig, m mountEntry) error {
  			return err
  		}
  		if fi, err := os.Lstat(dest); err != nil {
@@ -304,26 +298,8 @@ index 31d05174..abc372f3 100644
  				return err
  			}
  		} else if !fi.IsDir() {
-@@ -910,7 +910,7 @@ func setupDevSymlinks(rootfs string) error {
- 			src = link[0]
- 			dst = filepath.Join(rootfs, link[1])
- 		)
--		if err := os.Symlink(src, dst); err != nil && !os.IsExist(err) {
-+		if err := os.Symlink(src, dst); err != nil && !errors.Is(err, os.ErrExist) {
- 			return err
- 		}
- 	}
-@@ -1132,7 +1132,7 @@ func setReadonly() error {
- 
- func setupPtmx(config *configs.Config) error {
- 	ptmx := filepath.Join(config.Rootfs, "dev/ptmx")
--	if err := os.Remove(ptmx); err != nil && !os.IsNotExist(err) {
-+	if err := os.Remove(ptmx); err != nil && !errors.Is(err, os.ErrNotExist) {
- 		return err
- 	}
- 	if err := os.Symlink("pts/ptmx", ptmx); err != nil {
 diff --git a/libcontainer/specconv/spec_linux_test.go b/libcontainer/specconv/spec_linux_test.go
-index 66359f79..88156516 100644
+index 9aa3e4b..7950c91 100644
 --- a/libcontainer/specconv/spec_linux_test.go
 +++ b/libcontainer/specconv/spec_linux_test.go
 @@ -1,6 +1,7 @@
@@ -353,7 +329,7 @@ index 66359f79..88156516 100644
  	}
  
 diff --git a/libcontainer/state_linux.go b/libcontainer/state_linux.go
-index 2b7b8b5b..1f758e2a 100644
+index 2b7b8b5..1f758e2 100644
 --- a/libcontainer/state_linux.go
 +++ b/libcontainer/state_linux.go
 @@ -1,6 +1,7 @@
@@ -374,7 +350,7 @@ index 2b7b8b5b..1f758e2a 100644
  		}
  	}
 diff --git a/spec.go b/spec.go
-index d03d644e..15e933eb 100644
+index d03d644..15e933e 100644
 --- a/spec.go
 +++ b/spec.go
 @@ -91,7 +91,7 @@ created by an unprivileged user.
@@ -396,5 +372,5 @@ index d03d644e..15e933eb 100644
  		}
  		return nil, err
 -- 
-2.54.0
+2.55.0
 

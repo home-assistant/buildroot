@@ -10,10 +10,10 @@ as default to get the special treatment the other default devices have.
  1 file changed, 1 insertion(+)
 
 diff --git a/libcontainer/specconv/spec_linux.go b/libcontainer/specconv/spec_linux.go
-index 4143cdc0..fed1552a 100644
+index 999f8b48..c4e22457 100644
 --- a/libcontainer/specconv/spec_linux.go
 +++ b/libcontainer/specconv/spec_linux.go
-@@ -334,6 +334,7 @@ var AllowedDevices = []*devices.Device{
+@@ -369,6 +369,7 @@ var AllowedDevices = []*devices.Device{
  	// or cumbersome to supply additional device rules, so we have to
  	// keep this for the sake of backward compatibility.
  	{

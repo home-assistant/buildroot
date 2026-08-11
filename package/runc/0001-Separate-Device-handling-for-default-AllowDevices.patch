@@ -11,10 +11,10 @@ Signed-off-by: Stefan Agner <stefan@agner.ch>
  3 files changed, 70 insertions(+), 37 deletions(-)
 
 diff --git a/libcontainer/specconv/spec_linux.go b/libcontainer/specconv/spec_linux.go
-index be1e3d8e..c6cd742d 100644
+index 5713460e..37507b41 100644
 --- a/libcontainer/specconv/spec_linux.go
 +++ b/libcontainer/specconv/spec_linux.go
-@@ -201,6 +201,7 @@ func KnownMountOptions() []string {
+@@ -236,6 +236,7 @@ func KnownMemoryPolicyFlags() []string {
  var AllowedDevices = []*devices.Device{
  	// allow mknod for any device
  	{
@@ -22,7 +22,7 @@ index be1e3d8e..c6cd742d 100644
  		Rule: devices.Rule{
  			Type:        devices.CharDevice,
  			Major:       devices.Wildcard,
-@@ -210,6 +211,7 @@ var AllowedDevices = []*devices.Device{
+@@ -245,6 +246,7 @@ var AllowedDevices = []*devices.Device{
  		},
  	},
  	{
@@ -30,7 +30,7 @@ index be1e3d8e..c6cd742d 100644
  		Rule: devices.Rule{
  			Type:        devices.BlockDevice,
  			Major:       devices.Wildcard,
-@@ -219,10 +221,11 @@ var AllowedDevices = []*devices.Device{
+@@ -254,10 +256,11 @@ var AllowedDevices = []*devices.Device{
  		},
  	},
  	{
@@ -46,7 +46,7 @@ index be1e3d8e..c6cd742d 100644
  		Rule: devices.Rule{
  			Type:        devices.CharDevice,
  			Major:       1,
-@@ -232,10 +235,11 @@ var AllowedDevices = []*devices.Device{
+@@ -267,10 +270,11 @@ var AllowedDevices = []*devices.Device{
  		},
  	},
  	{
@@ -62,7 +62,7 @@ index be1e3d8e..c6cd742d 100644
  		Rule: devices.Rule{
  			Type:        devices.CharDevice,
  			Major:       1,
-@@ -245,10 +249,11 @@ var AllowedDevices = []*devices.Device{
+@@ -280,10 +284,11 @@ var AllowedDevices = []*devices.Device{
  		},
  	},
  	{
@@ -78,7 +78,7 @@ index be1e3d8e..c6cd742d 100644
  		Rule: devices.Rule{
  			Type:        devices.CharDevice,
  			Major:       1,
-@@ -258,10 +263,11 @@ var AllowedDevices = []*devices.Device{
+@@ -293,10 +298,11 @@ var AllowedDevices = []*devices.Device{
  		},
  	},
  	{
@@ -94,7 +94,7 @@ index be1e3d8e..c6cd742d 100644
  		Rule: devices.Rule{
  			Type:        devices.CharDevice,
  			Major:       5,
-@@ -271,10 +277,11 @@ var AllowedDevices = []*devices.Device{
+@@ -306,10 +312,11 @@ var AllowedDevices = []*devices.Device{
  		},
  	},
  	{
@@ -110,7 +110,7 @@ index be1e3d8e..c6cd742d 100644
  		Rule: devices.Rule{
  			Type:        devices.CharDevice,
  			Major:       1,
-@@ -284,10 +291,11 @@ var AllowedDevices = []*devices.Device{
+@@ -319,10 +326,11 @@ var AllowedDevices = []*devices.Device{
  		},
  	},
  	{
@@ -126,7 +126,7 @@ index be1e3d8e..c6cd742d 100644
  		Rule: devices.Rule{
  			Type:        devices.CharDevice,
  			Major:       1,
-@@ -298,6 +306,7 @@ var AllowedDevices = []*devices.Device{
+@@ -333,6 +341,7 @@ var AllowedDevices = []*devices.Device{
  	},
  	// /dev/pts/ - pts namespaces are "coming soon"
  	{
@@ -134,7 +134,7 @@ index be1e3d8e..c6cd742d 100644
  		Rule: devices.Rule{
  			Type:        devices.CharDevice,
  			Major:       136,
-@@ -307,6 +316,7 @@ var AllowedDevices = []*devices.Device{
+@@ -342,6 +351,7 @@ var AllowedDevices = []*devices.Device{
  		},
  	},
  	{
@@ -142,7 +142,7 @@ index be1e3d8e..c6cd742d 100644
  		Rule: devices.Rule{
  			Type:        devices.CharDevice,
  			Major:       5,
-@@ -397,12 +407,14 @@ func CreateLibcontainerConfig(opts *CreateOpts) (*configs.Config, error) {
+@@ -421,12 +431,14 @@ func CreateLibcontainerConfig(opts *CreateOpts) (*configs.Config, error) {
  		config.Mounts = append(config.Mounts, cm)
  	}
  
@@ -159,7 +159,7 @@ index be1e3d8e..c6cd742d 100644
  	if err != nil {
  		return nil, err
  	}
-@@ -968,21 +980,22 @@ func stringToDeviceRune(s string) (devices.Type, error) {
+@@ -1020,21 +1032,22 @@ func stringToDeviceRune(s string) (devices.Type, error) {
  	}
  }
  
@@ -187,7 +187,7 @@ index be1e3d8e..c6cd742d 100644
  		if ad.Path != "" {
  			config.Devices = append(config.Devices, ad)
  		}
-@@ -1002,7 +1015,7 @@ next:
+@@ -1054,7 +1067,7 @@ next:
  			}
  			dt, err := stringToDeviceRune(d.Type)
  			if err != nil {
@@ -196,7 +196,7 @@ index be1e3d8e..c6cd742d 100644
  			}
  			if d.FileMode != nil {
  				filemode = *d.FileMode &^ unix.S_IFMT
-@@ -1022,7 +1035,24 @@ next:
+@@ -1074,7 +1087,24 @@ next:
  		}
  	}
  
@@ -223,10 +223,10 @@ index be1e3d8e..c6cd742d 100644
  
  func setupUserNamespace(spec *specs.Spec, config *configs.Config) error {
 diff --git a/libcontainer/specconv/spec_linux_test.go b/libcontainer/specconv/spec_linux_test.go
-index 66359f79..9aa3e4b9 100644
+index 3e532d49..1a25bc61 100644
 --- a/libcontainer/specconv/spec_linux_test.go
 +++ b/libcontainer/specconv/spec_linux_test.go
-@@ -886,17 +886,17 @@ func TestCreateDevices(t *testing.T) {
+@@ -895,17 +895,17 @@ func TestCreateDevices(t *testing.T) {
  
  	conf := &configs.Config{}
  

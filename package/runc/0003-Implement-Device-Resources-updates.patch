@@ -12,10 +12,10 @@ Signed-off-by: Stefan Agner <stefan@agner.ch>
  2 files changed, 21 insertions(+), 9 deletions(-)
 
 diff --git a/libcontainer/specconv/spec_linux.go b/libcontainer/specconv/spec_linux.go
-index 10b43fc2..4143cdc0 100644
+index 5aafa2ef..999f8b48 100644
 --- a/libcontainer/specconv/spec_linux.go
 +++ b/libcontainer/specconv/spec_linux.go
-@@ -412,7 +412,7 @@ func CreateLibcontainerConfig(opts *CreateOpts) (*configs.Config, error) {
+@@ -436,7 +436,7 @@ func CreateLibcontainerConfig(opts *CreateOpts) (*configs.Config, error) {
  		return nil, err
  	}
  
@@ -24,7 +24,7 @@ index 10b43fc2..4143cdc0 100644
  
  	c, err := CreateCgroupConfig(opts, defaultAllowedDevices)
  	if err != nil {
-@@ -1052,7 +1052,7 @@ next:
+@@ -1104,7 +1104,7 @@ next:
  	return nil
  }
  
@@ -34,18 +34,18 @@ index 10b43fc2..4143cdc0 100644
  next:
  	for _, ad := range AllowedDevices {
 diff --git a/update.go b/update.go
-index d1697a6a..4f22064a 100644
+index 11a15718..5e9f89b5 100644
 --- a/update.go
 +++ b/update.go
-@@ -14,6 +14,7 @@ import (
+@@ -13,6 +13,7 @@ import (
+ 
  	"github.com/docker/go-units"
- 	"github.com/opencontainers/runc/libcontainer/configs"
  	"github.com/opencontainers/runc/libcontainer/intelrdt"
 +	"github.com/opencontainers/runc/libcontainer/specconv"
  	"github.com/opencontainers/runtime-spec/specs-go"
  	"github.com/urfave/cli"
  )
-@@ -360,6 +361,24 @@ other options are ignored.
+@@ -358,6 +359,24 @@ other options are ignored.
  		config.Cgroups.Resources.PidsLimit = r.Pids.Limit
  		config.Cgroups.Resources.Unified = r.Unified
  
@@ -70,7 +70,7 @@ index d1697a6a..4f22064a 100644
  		// Update Intel RDT
  		l3CacheSchema := context.String("l3-cache-schema")
  		memBwSchema := context.String("mem-bw-schema")
-@@ -395,13 +414,6 @@ other options are ignored.
+@@ -385,13 +404,6 @@ other options are ignored.
  			}
  		}
  

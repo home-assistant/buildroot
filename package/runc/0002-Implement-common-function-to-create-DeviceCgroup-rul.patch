@@ -9,10 +9,10 @@ Signed-off-by: Stefan Agner <stefan@agner.ch>
  1 file changed, 49 insertions(+), 35 deletions(-)
 
 diff --git a/libcontainer/specconv/spec_linux.go b/libcontainer/specconv/spec_linux.go
-index c6cd742d..10b43fc2 100644
+index 37507b41..5aafa2ef 100644
 --- a/libcontainer/specconv/spec_linux.go
 +++ b/libcontainer/specconv/spec_linux.go
-@@ -731,6 +731,48 @@ func initSystemdProps(spec *specs.Spec) ([]systemdDbus.Property, error) {
+@@ -787,6 +787,48 @@ func initSystemdProps(spec *specs.Spec) ([]systemdDbus.Property, error) {
  	return sp, nil
  }
  
@@ -61,7 +61,7 @@ index c6cd742d..10b43fc2 100644
  func CreateCgroupConfig(opts *CreateOpts, defaultDevs []*devices.Device) (*cgroups.Cgroup, error) {
  	var (
  		myCgroupPath string
-@@ -787,39 +829,10 @@ func CreateCgroupConfig(opts *CreateOpts, defaultDevs []*devices.Device) (*cgrou
+@@ -843,39 +885,10 @@ func CreateCgroupConfig(opts *CreateOpts, defaultDevs []*devices.Device) (*cgrou
  
  	// In rootless containers, any attempt to make cgroup changes is likely to fail.
  	// libcontainer will validate this but ignores the error.
@@ -103,8 +103,8 @@ index c6cd742d..10b43fc2 100644
  			if r.Memory != nil {
  				if r.Memory.Limit != nil {
  					c.Resources.Memory = *r.Memory.Limit
-@@ -945,12 +958,13 @@ func CreateCgroupConfig(opts *CreateOpts, defaultDevs []*devices.Device) (*cgrou
- 				}
+@@ -997,12 +1010,13 @@ func CreateCgroupConfig(opts *CreateOpts, defaultDevs []*devices.Device) (*cgrou
+ 				c.Resources.Unified = maps.Clone(r.Unified)
  			}
  		}
 -	}

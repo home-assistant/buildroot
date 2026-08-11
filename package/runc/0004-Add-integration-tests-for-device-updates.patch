@@ -9,10 +9,10 @@ Signed-off-by: Stefan Agner <stefan@agner.ch>
  1 file changed, 62 insertions(+)
 
 diff --git a/tests/integration/update.bats b/tests/integration/update.bats
-index e3d1922e..964a0e9d 100644
+index 68e0fdd3..4478a7dd 100644
 --- a/tests/integration/update.bats
 +++ b/tests/integration/update.bats
-@@ -826,6 +826,68 @@ EOF
+@@ -854,6 +854,68 @@ EOF
  	[ -z "$(<"$CONTAINER_OUTPUT")" ]
  }
  

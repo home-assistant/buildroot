@@ -8,10 +8,10 @@ Subject: [PATCH] Incremental update device permission
  1 file changed, 1 insertion(+), 4 deletions(-)
 
 diff --git a/update.go b/update.go
-index 4f22064a..117c1ae8 100644
+index 5e9f89b5..8f84094f 100644
 --- a/update.go
 +++ b/update.go
-@@ -362,10 +362,7 @@ other options are ignored.
+@@ -360,10 +360,7 @@ other options are ignored.
  		config.Cgroups.Resources.Unified = r.Unified
  
  		if len(r.Devices) > 0 {

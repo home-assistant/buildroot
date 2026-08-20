@@ -43,6 +43,14 @@ ifeq ($(BR2_TARGET_ROOTFS_EROFS_ZTAILPACKING),y)
 ROOTFS_EROFS_ARGS += -Eztailpacking
 endif
 
+# A multithreading-enabled mkfs.erofs defaults to one worker per CPU,
+# a multithreading-disabled one rejects the --workers option.
+ifeq ($(BR2_TARGET_ROOTFS_EROFS_MULTITHREADED),y)
+ROOTFS_EROFS_ARGS += --workers=$(PARALLEL_JOBS)
+else ifeq ($(BR2_PACKAGE_HOST_EROFS_UTILS_MULTITHREADING),y)
+ROOTFS_EROFS_ARGS += --workers=1
+endif
+
 define ROOTFS_EROFS_CMD
 	$(HOST_DIR)/bin/mkfs.erofs $(ROOTFS_EROFS_ARGS) $@ $(TARGET_DIR)
 endef

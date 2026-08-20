@@ -114,6 +114,14 @@ config BR2_TARGET_ROOTFS_EROFS_ALL_FRAGMENTS
 	  Forcely record the whole files into a special inode for better
 	  compression. Introduced in Linux 6.1.
 
+config BR2_TARGET_ROOTFS_EROFS_MULTITHREADED
+	bool "enable multi-threaded compression"
+	depends on !BR2_TARGET_ROOTFS_EROFS_NONE
+	select BR2_PACKAGE_HOST_EROFS_UTILS_MULTITHREADING
+	help
+	  Compress the filesystem image with one worker per CPU, or
+	  following BR2_JLEVEL respectively.
+
 config BR2_TARGET_ROOTFS_EROFS_ZTAILPACKING
 	bool "enable ztailpacking"
 	help

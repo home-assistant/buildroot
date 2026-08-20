@@ -77,5 +77,9 @@ HOST_EROFS_UTILS_CONF_OPTS += \
 	--without-selinux \
 	--without-zlib
 
+ifeq ($(BR2_PACKAGE_HOST_EROFS_UTILS_MULTITHREADING),y)
+HOST_EROFS_UTILS_CONF_OPTS += --enable-multithreading
+endif
+
 $(eval $(autotools-package))
 $(eval $(host-autotools-package))

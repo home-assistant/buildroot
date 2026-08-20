@@ -5,3 +5,10 @@ config BR2_PACKAGE_HOST_EROFS_UTILS
 	  Userspace utilities for EROFS filesystem
 
 	  https://git.kernel.org/pub/scm/linux/kernel/git/xiang/erofs-utils.git
+
+config BR2_PACKAGE_HOST_EROFS_UTILS_MULTITHREADING
+	bool "multithreading support"
+	depends on BR2_PACKAGE_HOST_EROFS_UTILS
+	help
+	  Build mkfs.erofs with multithreading support. It then defaults
+	  to one worker per CPU, adjustable with --workers.

@@ -1,0 +1,38 @@
+From f510bf5d3f3e3405710311ceb4a3539267218bde Mon Sep 17 00:00:00 2001
+From: Florian Larysch <larysch@fixme.gmbh>
+Date: Tue, 14 Jul 2026 16:03:12 +0200
+Subject: [PATCH] pahole: preserve const-ness of bsearch result
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Fixes:
+
+pahole/btf_encoder.c: In function ‘btf_encoder__tag_kfunc’:
+pahole/btf_encoder.c:1526:16: error: assignment discards ‘const’ qualifier from pointer target type [-Werror=discarded-qualifiers]
+ 1526 |         target = bsearch(&key, base, cnt, sizeof(key), btf_func_cmp);
+      |                ^
+
+Upstream: N/A (implicitly fixed as part of a refactor in commit c567717
+("btf_encoder: Refactor btf_encoder__tag_kfuncs()"), released in v1.30)
+Signed-off-by: Florian Larysch <fl@n621.de>
+---
+ btf_encoder.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/btf_encoder.c b/btf_encoder.c
+index c2df2bc..4118028 100644
+--- a/btf_encoder.c
++++ b/btf_encoder.c
+@@ -1516,7 +1516,7 @@ static int btf_encoder__tag_kfunc(struct btf_encoder *encoder, struct gobuffer *
+ {
+ 	struct btf_func key = { .name = kfunc };
+ 	struct btf *btf = encoder->btf;
+-	struct btf_func *target;
++	const struct btf_func *target;
+ 	const void *base;
+ 	unsigned int cnt;
+ 	int err = -1;
+-- 
+2.55.0
+

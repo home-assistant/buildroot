@@ -7,7 +7,7 @@
 BUSYBOX_VERSION = 1.37.0
 BUSYBOX_SITE = https://www.busybox.net/downloads
 BUSYBOX_SOURCE = busybox-$(BUSYBOX_VERSION).tar.bz2
-BUSYBOX_LICENSE = GPL-2.0, bzip2-1.0.4
+BUSYBOX_LICENSE = GPL-2.0, bzip2-1.0.6
 BUSYBOX_LICENSE_FILES = LICENSE archival/libarchive/bz/LICENSE
 BUSYBOX_CPE_ID_VENDOR = busybox
 
@@ -15,12 +15,30 @@ BUSYBOX_CPE_ID_VENDOR = busybox
 # 0004-nslookup-sanitize-all-printed-strings-with-printable.patch
 BUSYBOX_IGNORE_CVES += CVE-2022-28391
 
+# This is not stale just wrong NVD entry.
+# 0008-awk.c-fix-CVE-2023-42366-bug-15874.patch
+BUSYBOX_IGNORE_CVES += CVE-2023-42366
+
+# 0016-archival-disallow-path-traversals-CVE-2023-39810.patch
+BUSYBOX_IGNORE_CVES += CVE-2023-39810
+
+# 0015-netstat-sanitize-argv0-for-p-CVE-2024-58251.patch
+BUSYBOX_IGNORE_CVES += CVE-2024-58251
+
 # 0012-archival-libarchive-sanitize-filenames-on-output.patch
 # 0013-testsuite-tar-tests-fix-test-after-cve-2025-46394.patch
 BUSYBOX_IGNORE_CVES += CVE-2025-46394
 
 # 0014-wget-dont-allow-control-characters-or-spaces-in-the-URL.patch
 BUSYBOX_IGNORE_CVES += CVE-2025-60876
+
+# 0017-tar-strip-unsafe-hardlink-components.patch
+# 0018-only-strip-unsafe-components-from-hardlinks.patch
+BUSYBOX_IGNORE_CVES += CVE-2026-26157 CVE-2026-26158
+
+# 0019-CVE-2026-29004-01.patch
+# 0020-CVE-2026-29004-02.patch
+BUSYBOX_IGNORE_CVES += CVE-2026-29004
 
 BUSYBOX_CFLAGS = \
 	$(TARGET_CFLAGS)

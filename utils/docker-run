@@ -21,7 +21,7 @@ declare -a docker_opts=(
     --user "$(id -u):$(id -g)"
     --workdir "$(pwd)"
     --security-opt label=disable
-    --network host
+    --network "$([ "${NO_NETWORK:-0}" -eq 1 ] && echo none || echo host)"
 )
 
 declare -a mountpoints=(
@@ -95,6 +95,17 @@ fi
 if [ "${BR2_DL_DIR}" ]; then
     mountpoints+=( "${BR2_DL_DIR}" )
     docker_opts+=( --env BR2_DL_DIR )
+fi
+
+# Testing the existence of the variable instead of a non-empty value
+# allows passing an empty BR2_EXTERNAL variable to disable currently
+# set external trees.
+if [ "${BR2_EXTERNAL+set}" ]; then
+    docker_opts+=( --env BR2_EXTERNAL )
+    for br2_ext in ${BR2_EXTERNAL//:/ }; do
+        # bind volume source paths must be absolute
+        mountpoints+=( "$(cd "${br2_ext}" && pwd)" )
+    done
 fi
 
 # shellcheck disable=SC2013 # can't use while-read because of the assignment

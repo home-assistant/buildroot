@@ -892,6 +892,8 @@ endif
 ifeq ($(BR2_PACKAGE_LINUX_FIRMWARE_BRCM_BCM43XX),y)
 LINUX_FIRMWARE_FILES += \
 	brcm/bcm4329-fullmac-4.bin \
+	brcm/bcm43xx-0.fw \
+	brcm/bcm43xx_hdr-0.fw \
 	brcm/brcmfmac4329-sdio.bin \
 	brcm/brcmfmac4330-sdio.bin \
 	brcm/brcmfmac4334-sdio.bin \

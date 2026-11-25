@@ -67,13 +67,13 @@ else
 EROFS_UTILS_CONF_OPTS += --without-libzstd
 endif
 
-HOST_EROFS_UTILS_DEPENDENCIES = host-pkgconf host-util-linux host-lz4 host-xz
+HOST_EROFS_UTILS_DEPENDENCIES = host-pkgconf host-util-linux host-lz4 host-xz host-zstd
 HOST_EROFS_UTILS_CONF_OPTS += \
 	--enable-lz4 \
 	--enable-lzma \
 	--disable-fuse \
 	--without-libdeflate \
-	--without-libzstd \
+	--with-libzstd \
 	--without-selinux \
 	--without-zlib
 
